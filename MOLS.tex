@@ -248,27 +248,25 @@ The existence of an affine plane of order \(n\) is equivalent to the existence o
 
 \subsection{\(k\)-nets of order \(n\)}
 
+
 \begin{definition}
-
-    A \(k\)-net of order \(n\) is a set of \(n^{2}\) points and \(kn\) lines such that the following axioms hold,
-
-    \begin{enumerate}
-    \item Parallelism as defined in~\ref{lemma:parallel} is an equivalence relation on the set of lines.
-    \item Every line has exactly \(n\) points and every parallel class has \(n\) lines.
-            \item There are \(k\) parallel classes of lines. Each point lies on exactly \(k\) lines, one from each parallel class.
-    \end{enumerate}
+  A net degree \(k \geq 2\) and order \(n\) (hereafter a \(k\)-net of order \(n\)) is a set of \(n^2\) points and \(k\) parallel classes such that each parallel class consists of \(n\)
+  disjoint lines of size \(n\) and such thta lines of distinct parallel classes meet in a unique point.
 \end{definition}
 
 \(k\)-nets can be thought of as a generalisation of the incidence properties an affine plane, indeed the following lemma establishes that affine planes are a special case of affine planes.
 
 \begin{lemma}
-An \(n + 1\)-net of order \(n\) is an affine plane of order \(n\).
+An \(n + 1\)-net of order \(n \geq 2\) is an affine plane of order \(n\).
 \end{lemma}
 
 \begin{proof}
-  Suppose we have an (n + 1)-net of order \(n\), we will show that the axioms for an affine plane follow from those of the net. We will start with~\ref{axiom:aff-1}. Suppose we have a pair of distinct points \(p, q\) from our net and we make the assumption that two lines \(l \ne m\) contain both these points. Considering the parallel class of \(m\), each parallel line to \(m\) must intersect \(l\) at least one point, and these points of intersection must be disjoint due to parallelism. There are \(n\) points on the line and the \(n\) lines intersect collectively in at least \(n + 1\) points on \(l\) so there must be a point on \(l\) that two parallel lines through \(m\) intersect at. This however violates the definition of parallelism, therefore every pair of points has at most one line through it. At the same time counting because each line has \(n\) points on it there are \(n(n + 1)\binom{n}{2} = \binom{n^{2}}{2}\) pairs of points covered by lines, which implies that every pair of points has a unique line on it.
-  The next axiom,~\ref{axiom:aff-2} follows from the fact that because the parallel class of \(m\) partitions the plane, given a point \(p\) we have one unique line through \(p\) parallel to \(m\). The third axiom follows from~\ref{axiom:aff-3} and the fact that every point lies on \(k = n + 1 \geq 3\) lines so that we may a point \(p\) and two points \(q\) and \(r\) on two different lines through \(p\) so that they cannot be collinear.
+  Suppose we have an (n + 1)-net of order \(n\), we will show that the axioms for an affine plane follow from those of the net. 
+  Axiom~\ref{axiom:aff-1} directly follows from the definition of a net, as every pair of lines is either parallel or intersecting in a single point. The next axiom,~\ref{axiom:aff-2}, follows from the fact that because the parallel classes partition the plane, 
+  given a line \(l\) identifying a parallel class and a point \(p\) not on that line there is a single line in the parallel class through \(p\). The third axiom, Axiom~\ref{axiom:aff-3} follows from the fact that if \(n \geq 2\) one can identify 3 points, which cannot be included on the same line. 
 \end{proof}
+
+Because each parallel class partitions the point set every point in a \(k\)-net of order \(n\) is incident to \(k\) lines, one from each parallel class.
 
 One remarkable property of a \(n\)-net of order \(n\) is that they may be extended uniquely to an affine plane. This will be used later to show some interesting theorems about mutually orthogonal latin squares.
 
@@ -277,8 +275,9 @@ An \(n\)-net of order \(n\) may be extended to an \((n + 1)\)-net of order \(n\)
 \end{lemma}
 
 \begin{proof}
-  We will begin by constructing a set of \(n\) parallel lines. The procedure to do this will be to pick a point \(p_{1}\) from among the set of \(n^{2}\) points in the net, and construct the line \(l_{1}\) consisting of all points not on any line through \(p_{1}\) plus \(p_{1}\) itself. Because \(p_{1}\) is on \(n\) lines concurrent at \(p_{1}\) only, there are \(n^{2} - n(n - 1) - 1 = n - 1\) points not covered by any line through \(p_{1}\) and therefore \(|l_{1}| = n\). The next line \(l_{2}\) will be constructed by picking \(p_{2} \notin l_{1}\) and taking the set of points not on any line through \(p_{1}\) with \(p_{2}\), and so on to get a set of \(n\) lines and points \(p_{1}, l_{1}, p_{2}, l_{2}, \ldots, p_{n}, l_{n}\). To see that the lines are disjoint we are going to show that the relationship \(p \sim q \iff p = q \text{or p and q are not on a line together}\) is an equivalence relation. Reflexivity and symmetry are clear so it just remains to show that the relationship is transitive. Suppose I have three distinct points \(p, q, r\) such that \(p\) and \(q\) are not on a line together, \(q\) and \(r\) are not on a line together, but \(p\) and \(r\) are on a line together.
-  By our net axioms there is exactly one line through \(q\) that is parallel to \(pr\). Other than that the remaining \(n - 1\) lines through \(q\) must intersect the line \(pr\) in one of \(n\) points on \(pr\) except \(p\) and \(r\) since \(q\) is on a line with neither. However by the pigeonhole principle we conclude that two lines through \(q\) must intersect at the same point on the line \(pr\) and by contradiction we conclude that \(p\) cannot be collinear with \(r\). Because the collinearity relationship is an equivalence relation the lines form equivalence classes that partition the plane. All that needs to be checked then is that these new lines do not intersect twice with another line from the original net. If \(l_{i}\) is a line constructed from points not collinear with \(p_{i}\) and \(m\) a line from the original net, assume that \(\{p, q\} \subseteq l_{i} \cap m\). By taking the unique parallel lines through each point in \(l_{i} \setminus m\) we have \(n - 1\) lines that must intersect with at most \(n - 2\) points in \(l_{i} \setminus m\), so at least two lines must intersect at the same point in \(l_{i} \setminus m\) --- which contradicts the parallel properties of these lines. Thus we have an \(n(n + 1)\)-net of order \(n\).
+  We will begin by constructing a set of \(n\) parallel lines. 
+  The procedure to do this will be to pick a point \(p_{1}\) from among the set of \(n^{2}\) points in the net, and construct the line \(l_{1}\) consisting of all points not on any line through \(p_{1}\) plus \(p_{1}\) itself. Because \(p_{1}\) is on \(n\) lines concurrent at \(p_{1}\) only, there are \(n^{2} - n(n - 1) - 1 = n - 1\) points not covered by any line through \(p_{1}\) and therefore \(|l_{1}| = n\). The next line \(l_{2}\) will be constructed by picking \(p_{2} \notin l_{1}\) and taking the set of points not on any line through \(p_{2}\), and so on to get a set of \(n\) lines and points \(p_{1}, l_{1}, p_{2}, l_{2}, \ldots, p_{n}, l_{n}\). To see that the lines are disjoint we are going to show that the relationship \(p \sim q \iff p = q \text{or p and q are not on a line together}\) is an equivalence relation. Reflexivity and symmetry are clear so it just remains to show that the relationship is transitive. Suppose I have three distinct points \(p, q, r\) such that \(p\) and \(q\) are not on a line together, \(q\) and \(r\) are not on a line together, but \(p\) and \(r\) are on a line together.
+  By our net axioms there is exactly one line through \(q\) that is parallel to \(pr\). Other than that the remaining \(n - 1\) lines through \(q\) must intersect the line \(pr\) in one of \(n\) points on \(pr\) except \(p\) and \(r\) since \(q\) is on a line with neither. However by the pigeonhole principle we conclude that two lines through \(q\) must intersect at the same point on the line \(pr\) and by contradiction we conclude that \(p\) cannot be collinear with \(r\). Because the collinearity relationship is an equivalence relation the lines form equivalence classes that partition the plane. All that needs to be checked then is that these new lines do not intersect twice with another line from the original net. If \(l_{i}\) is a line constructed from points not collinear with \(p_{i}\) and \(m\) a line from the original net, assume that \(\{p, q\} \subseteq l_{i} \cap m\). By taking the unique parallel lines through each point in \(l_{i} \setminus m\) we have \(n - 1\) lines that must intersect with at most \(n - 2\) points in \(l_{i} \setminus m\), so at least two lines must intersect at the same point in \(l_{i} \setminus m\) --- which contradicts the parallel properties of these lines. Thus we have an \((n + 1)\)-net of order \(n\).
 \end{proof}
     \section{Projective Spaces and Orthogonal Hypercubes}
     
@@ -408,8 +407,25 @@ A complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes will alway
 \end{theorem}
 
 \begin{proof}
-  Let \(X = \{e_{1}, e_{2}, \ldots, e_{d}\}\) where \(e_{i} = (0, 0, \ldots, 1, 0, 0, \ldots, 0)\) is a point in \(\PG(d, n)\) having a 1 in the \(i\)th position and zero everywhere else. Picking any \(d - 1\) points in \(X\) determines a \(d - 2\) dimensional subspace in the hyperplane at infinity \(H_{\infty}\). Let \(I \subseteq X\) be a basis for a \((d - 2)\)-dimensional hyperplane in \(\PG(d, n)\), \(\Pi_{I, k}\). There are \(n + 1\) \((d - 1)\)-dimensional hyperplanes through \(\Pi_{I}\) and excluding \(H_{\infty}\) they have the form \(<I, v>\) where \(v = (0, 0, 0, \ldots, k, 0, 0, \ldots, 1)\), a \(k\) in the position corresponding to the single basis vector in \(X \setminus I\). Taking a set of \(d\) planes \(\Pi_{I_{1}, x_{1}}, \Pi_{I_{2}, x_{2}}, \ldots, \Pi_{I_{d}, x_{d}}\)
-  their intersection will be a single affine point \((x_{1}, x_{2}, \ldots, x_{d}, 1)\) . These planes thus coordinatise the affine plane. We shall now count the number of \(d - 2\)-dimensional planes in \(H_{\infty}\) that do not intersect any point in \(X\). Let \(A_{i}\) be the set of \(d - 2\) hyperplanes containing the point \(e_{i} \in X\), we wish to count \(|\bigcap A^{\prime}_{i}|\), this can be done with the principle of inclusion-exclusion and repeated application of Lemma~\ref{lemma:1},
+  Let \(X = \{e_{1}, e_{2}, \ldots, e_{d}\}\) where \(e_{i} = (0, 0, \ldots, 1, 0, \ldots, 0)\) is a point in \(\PG(d, n)\) having a 1 in the \(i\)th position and zero everywhere else.
+  By removing some \(e_i\) we get a subset \(S\) of \(d - 1\) points in \(X\) that spans a \(d - 2\) plane in the hyperplane at infinity, furthermore there are \(q\) hyperplanes through \(S\) apart from the hyperplane at infinity --- \(x_i X_i + X_{d + 1}\) and \(X_{i} = 0\).
+  The hyperplanes constructed by removing some \(e_i\) from \(X\) we will call coordinate hyperplanes. If we take \(d\) coordinate planes we can show their intersection is an affine point. Pick \(d\) hyperplanes constructed by removing one of \(e_1, e_2 \ldots e_d\) in turn,
+  to obtain their intersection we must find a solution to the following system of homogenous equations:
+
+  \begin{equation*}
+    A = \begin{bmatrix}
+      x_1 & 0 & \ldots & 0 & \alpha_1 \\
+      0 & x_2 & \ldots & 0 & \alpha_2 \\
+      \ldots \\ 
+      0 & 0 & \ldots & 0 & x_d & \alpha_d
+    \end{bmatrix}
+  \end{equation*}
+  Where \(\alpha_i = 0\) if the hyperplane it describes is \(X_i\) and \(\alpha_i = 0\) otherwise.
+  This system has rank \(d\) and a single projective point as a solution, namely \((\alpha_1 x_1, \alpha_2 x_2, \ldots, \alpha_d x_d, 1)\). This allows us to coordinatise the affine space in terms of 
+  hyperplanes at infinity.
+
+  Our analogue to symbol planes in Theorem~\ref{thm:mut-ortho} will be symbol hyperplanes whose intersection with the hyperplane at infinity does not include \(X\). To count such hyperplanes let 
+  \(A_{i}\) be the set of \(d - 2\) hyperplanes containing the point \(e_{i} \in X\), we wish to count \(|\bigcap A^{\prime}_{i}|\) and this can be done with the principle of inclusion-exclusion and repeated application of Lemma~\ref{lemma:1}
 
   \begin{align*}
     |\bigcap A^{\prime}_{i}| &= \sum_{i = 0}^{d - 1} (-1)^{i} \binom{d}{i} \frac{n^{d - i}}{n - 1} \\
@@ -421,9 +437,26 @@ A complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes will alway
                   &= (n - 1)^{d - 1}
   \end{align*}
 
- The bound on mutually orthogonal sets of \((d, n, 1, d - 1)\)-hypercubes is \((n - 1)^{d - 1}\) by Theorem~\ref{thm:mut-ortho}. Let \(\mathcal{H} = \{\mathcal{H}_{1}, \mathcal{H}_{2}, \ldots, \mathcal{H}_{(n - 1)^{d - 1}}\}\) be the set of \(d - 2\) dimensional planes in \(H_{\infty}\) not containing points in \(X\). Each of these planes have \(n\) \(d - 1\) dimensional planes though them not including \(H_{\infty}\). Let \(S_{i}\) be a plane (here after called a symbol plane) through \(\mathcal{H}_{j}\), and note that it contains \(n^{d}\) points outside of \(H_{\infty}\). Taking the intersection of \(S_{i}\) with any \(d - 1\) planes \(\Pi_{I_{1}, x_{1}}, \Pi_{I_{2}, x_{2}}, \ldots, \Pi_{I_{d - 1}, x_{d - 1}}\) (which represents a 1-subarray) defines a unique point that must be affine (as \(H_{j}\) does not contain any point in \(X\)). Taking any pair of symbol planes \(S_{i}\) and \(S_{j}\) through different planes \(\mathcal{H}_{k}\) and \(\mathcal{H}_{l}\) we get \(q^{d - 2}\) affine intersection points. Thus if we define a set of hypercubes \(A^{i}\) where \(A^{i}_{x_{1}, x_{2}, \ldots, x_{d}} = j\) if and only if \(S_{j} \cap (\bigcap_{1 \le k \le d}\Pi_{I_{k}, x_{k}}) \ne \emptyset\) we get a complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes.
 
+  Taking any hyperplane through any of the \((n - 1)^{d - 1}\) planes at infinity gives us a hyperplane of the form \(c_1X_1 + c_2X_2 + \ldots + c_d X_d + c_{d + 1}X_{d + 1}\) with each \(c_i\) non-zero (to avoid including one of the basis vectors). 
+  We can now consider it's intersection with \(d - 1\) coordinate planes, and WLOG assume that these planes are of the form \(x_i X_i + X_{d + 1}\) for each \(1 \leq i \leq d - 1\). Their intersection is the homogenous solution to the following,
 
+  \begin{equation*}
+    A = \begin{bmatrix}
+      x_1 & 0 & \ldots & 0 & \alpha_1 \\
+      0 & x_2 & \ldots & 0 & \alpha_2 \\
+      \ldots \\ 
+      0 & 0 & \ldots & x_{d - 1} & 0 & \alpha_d \\
+      c_1 & c_2 & \ldots & c_d & c_{d + 1} 
+    \end{bmatrix}
+  \end{equation*}
+
+  This system has rank at least \(d - 1\) and at most \(d\) so the solution space is either a point or a line. If the solution space is a line, or if a point at infinity we may add the restriction \(X_{d + 1} = 0\) and obtain,
+  \(X_1 = X_2 = \ldots = X_{d - 1} = 0\) and plugging this into our last equation get \(c_d X_d = 0\). Because \(c_d \neq 0\) we have \(X_d = 0\) and the solution \((0, 0, \ldots, 0)\) --- a contradiction. Thus the solution must be an affine point, i.e that the symbol hyperplanes intersect each 1-subaray at a single point. 
+  By each of \(a \in \mathbb{F}_q\) to each of the \(q\) hyperplanes through each of the \((d - 2)\)-dimensional spaces in the hyperplane at infinity not intersecting \(X\) we get a set of \((n - 1)^{d - 1}\) hypercubes. 
+  These hypercubes are orthogonal because the intersection of any pair of symbol planes must be a \((d - 2)\)-dimensional space with \(\sum_i^{d - 2} q^{i} - \sum_i^{d - 3} q^{i} = q^{d - 2}\) affine points.
+
+  By Theorem~\ref{thm:mut-ortho} we have a complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes.
 \end{proof}
 
 There is a connection between the proof Theorem~\ref{thm:mut-ortho}, Theorem~\ref{thm:general-ortho-proof} and existing proofs of similar theorems in the literature. In particular, in REFERENCE TO MULLEN AND LAYWINE HERE, we have a theorem which interpreted in the language of Definition~\ref{def:hypercube} essentially shows Theorem~\ref{general-ortho-proof}. More to the point, they construct general hypercubes using polynomials and these polynomials may be put in correspondence with the symbol and coordinate planes in our theorems. This is most clear in the \(d = 2\) case where the polynomials Mullen defines are of the form \(ax + y\) for non-zero \(a\). These lines are precisely the \(n - 1\) lines that do not contain the points \((1, 0, 0)\) and \((0, 1, 0)\) at infinity.
