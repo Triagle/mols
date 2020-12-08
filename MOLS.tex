@@ -1,9 +1,9 @@
 \documentclass{article}
 
-% \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{amsrefs}
 \usepackage{xargs}
 \usepackage[pdftex,dvipsnames]{xcolor}
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
@@ -20,7 +20,6 @@
 \newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 \newcommand{\PG}{\mathrm{PG}}
 \begin{document}
-    \info[inline]{Super rough draft, some direction on writing style, proof techniques, etc, would be greatly appreciated!}
 
     \section{Affine and Projective Spaces}
     To begin we need some definitions, of latin squares and of vector spaces over finite fields.
@@ -349,18 +348,19 @@ An \(n\)-net of order \(n\) may be extended to an \((n + 1)\)-net of order \(n\)
         Moreover, if \(d \geq 2r\) two such hypercubes are \textit{orthogonal} if when superimposed each of the \(n^{2r}\) possible distinct pairs appears exactly \(n^{d - 2r}\) times. A set of hypercubes is mutually orthogonal if each pair of hypercubes in the set are orthogonal.
     \end{definition}
 
-    The familiar latin square is a \((2, n, 1, 0)\)-hypercube. The following theorem is due to John T. Ethier, Gary L. Mullen, et al,
+    The familiar latin square is a \((2, n, 1, 0)\)-hypercube. We will be interested in extending the classic result given in Theorem~\ref{thm:mols}, to do this we require a 
+    theorem that bounds the size of a mutually orthogonal set of hypercubes of dimension \(d\), order \(n\), type \(t\) and class \(r\). In~\cite{ethier2012sets} we have the following theorem bounding sets of MOHC:
 
-    \begin{theorem}[Ethier-Mullen-Panario-Stevens-Thomson]~\label{thm:mut-ortho}
+    \begin{theorem}~\label{thm:mut-ortho}
         The maximum number of mutually orthogonal hypercubes of dimension \(d\), order \(n\), type \(t\) and class \(r\) is bounded above by
 
-        \begin{equation*}
-            \frac{1}{n^r - 1}\left(n^d - 1 - \binom{d}{1}(n - 1) - \binom{d}{2}{(n - 1)}^2 - \cdots - \binom{d}{t} {(n - 1)}^t\right).
-        \end{equation*}
+        \begin{equation}
+            \frac{1}{n^r - 1}\left(n^d - 1 - \binom{d}{1}(n - 1) - \binom{d}{2}{(n - 1)}^2 - \cdots - \binom{d}{t} {(n - 1)}^t\right). \label{eq:ortho-bound}
+        \end{equation}
 
     \end{theorem}
 
-    For the machinery of the approaching theorem we also require this small result, 
+    A complete set of mutually orthogonal \((d,n,r,t)\)-hypercubes is a set of MOHC attaining the bound given by~\eqref{eq:ortho-bound}.For the machinery of the approaching theorem we also require this small result, 
 
     \begin{lemma}\label{lemma:3}
         In \(PG(3, q)\) if any three distinct planes do not intersect at a common line, they must intersect at a point. 
@@ -398,7 +398,6 @@ An \(n\)-net of order \(n\) may be extended to an \((n + 1)\)-net of order \(n\)
         Because any pair of symbol planes chosen from the same line only intersect at that line in \(\Pi_{\infty}\) the symbol planes partition the \(n^2\) coordinate points and thus assigning the symbol \(i\) to each point in the hypercube touching the symbol plane \(S_i\) defines a \((3, n, 1, 2)\)-hypercube. Defining the set of \({(n - 1)}^2\)
         hypercubes in a similar fashion gives us a set \(H\). The set \(H\) must be mutually orthogonal because any pair of symbol planes \(S_i, S^{\prime}_j\) from different lines in \(\Pi_{\infty}\) will intersect at a line for which \(q\) points are outside \(\Pi_{\infty}\) and this is equivalent to each pair of symbols occurring exactly \(n\) times when overlapping any pair of hypercubes in \(H\).
     \end{proof}
-    \todo[inline]{Proof of equivalence is not yet shown (but strongly held belief exists).}
 
     We can also prove a more general result for arbitrary dimensions.
 
@@ -459,6 +458,48 @@ A complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes will alway
   By Theorem~\ref{thm:mut-ortho} we have a complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes.
 \end{proof}
 
-There is a connection between the proof Theorem~\ref{thm:mut-ortho}, Theorem~\ref{thm:general-ortho-proof} and existing proofs of similar theorems in the literature. In particular, in REFERENCE TO MULLEN AND LAYWINE HERE, we have a theorem which interpreted in the language of Definition~\ref{def:hypercube} essentially shows Theorem~\ref{general-ortho-proof}. More to the point, they construct general hypercubes using polynomials and these polynomials may be put in correspondence with the symbol and coordinate planes in our theorems. This is most clear in the \(d = 2\) case where the polynomials Mullen defines are of the form \(ax + y\) for non-zero \(a\). These lines are precisely the \(n - 1\) lines that do not contain the points \((1, 0, 0)\) and \((0, 1, 0)\) at infinity.
 
+Theorem~\ref{thm:general-ortho-proof} has been proven elsewhere in literature, notably in~\cite{laywine1998discrete}. Polynomials of the form \(f_{a_1, a_2, \ldots, a_d}(x_1, x_2, \ldots, x_d) = a_1x_1 + a_2x_2 + \ldots a_d x_d\), with at least two \(a_i\) nonzero, are used to define a complete set of mutually orthogonal \((d, n, 1, 0)\)-hypercubes.
+The polynomials for which all \(a_i\) is nonzero are precisely the hyperplanes not through \(X\) given in Theorem~\ref{thm:general-ortho-proof}. The remaining polynomials correspond to hyperplanes that intersect with one or more of the basis points in \(X\). Whilst this proof was found indepedently of Laywine and Mullen, 
+we have shown it is the same as what they end up with.
+
+It would be nice if, like in the two dimensional case, the existence of a complete set of \((d,n,r,0)\)-hypercubes implied the existence of a projective space \(\PG(d, n)\), 
+however~\cite{morgan2000affine} suggests that without further restrictions of the hypercubes chosen we cannot construct the right geometry.
+
+
+
+\begin{bibdiv}
+  \begin{biblist}
+    \bib{laywine1998discrete}{book}{
+  title={Discrete mathematics using Latin squares},
+  author={Laywine, Charles F and Mullen, Gary L},
+  volume={49},
+  year={1998},
+  pages={50--51},
+  publisher={John Wiley \& Sons}
+}
+\bib{ethier2012sets}{article}{
+  title={Sets of orthogonal hypercubes of class r},
+  author={Ethier, John T and Mullen, Gary L and Panario, Daniel and Stevens, Brett and Thomson, David},
+  journal={Journal of Combinatorial Theory, Series A},
+  volume={119},
+  number={2},
+  pages={430--439},
+  year={2012},
+  publisher={Elsevier}
+}
+
+\bib{morgan2000affine}{article}{
+  title={Affine geometries and sets of equiorthogonal frequency hypercubes},
+  author={Morgan, Ilene H},
+  journal={Journal of Combinatorial Designs},
+  volume={8},
+  number={6},
+  pages={435--441},
+  year={2000},
+  publisher={Wiley Online Library}
+}
+
+  \end{biblist}
+\end{bibdiv}
 \end{document}
