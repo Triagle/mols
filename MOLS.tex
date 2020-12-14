@@ -21,189 +21,200 @@
 \newcommand{\PG}{\mathrm{PG}}
 \begin{document}
 
-    \section{Affine and Projective Spaces}
-    To begin we need some definitions, of latin squares and of vector spaces over finite fields.
+\section{Affine and Projective Spaces}
+To begin we need some definitions, of latin squares and of vector spaces over finite fields.
 
-    \subsection{Finite Projective Spaces}
+\subsection{Finite Projective Spaces}
 
-    The original motivation for projective geometry was on making rigorous statements such as “parallel lines meet at infinity”, whose suggestion is natural in the study projection in graphic art. Whilst the study originally began with real projective spaces, whose application to perspective drawing was clear, such notions of points at infinity turn out to be useful when 
-    working in finite geometry. We will see how projective geometry has applications to the traditionally combinatorial latin squares and hypercubes, but first we need some preliminaries from finite projective geometry.
+The original motivation for projective geometry was on making rigorous
+statements such as “parallel lines meet at infinity”, whose suggestion is
+natural in the study projection in graphic art. Whilst the study of projective geometry originally
+began with real projective spaces, whose application to perspective drawing was
+clear, such notions of points at infinity turn out to be useful when working in
+finite geometry too. We will see how projective geometry has can help us understand the
+traditionally combinatorial latin squares and hypercubes, but first we need some
+preliminaries from finite projective geometry.
 
-    \begin{definition}
-        The vector space \(V(n, q)\) is the vector space whose vectors are the ordered \(n\)-tuples of elements in \(\mathbb{F}_q\) and scalars in \(\mathbb{F}_q\).
-    \end{definition}
+\begin{definition}
+  The vector space \(V(n, q)\) is the vector space whose vectors are the ordered \(n\)-tuples of elements in \(\mathbb{F}_q\) a,nd scalars in \(\mathbb{F}_q\).
+\end{definition}
 
-    \begin{definition}
-        The projective space \(\PG(n, q)\) is the geometry whose points, lines, rank \(k\) hyperplanes are lines, planes and rank \(k + 1\) subspaces in \(V(n + 1, q)\) respectively. 
-    \end{definition}
+\begin{definition}
+  The projective space \(\PG(n, q)\) is the geometry whose points, lines, rank \(k\) hyperplanes are lines, planes and rank \(k + 1\) subspaces in \(V(n + 1, q)\) respectively.
+\end{definition}
 
-    Most of our work will be done using constructions involving \(\PG(3, q)\) and \(\PG(2, q)\). The following housekeeping lemmas will be useful for these constructions.
+Most of our work will be done using constructions involving \(\PG(3, q)\) and \(\PG(2, q)\). The following housekeeping lemmas will be useful for these constructions.
 
-    \begin{lemma}\label{lemma:1}
-        The number of rank \(k\) subspaces in \(V(n, q)\) is \(\frac{(q^n - 1)(q^n - q)\ldots (q^n - q^{k - 1})}{(q^k - 1)(q^k - q)\ldots (q^k - q^{k - 1})}\).
-    \end{lemma}
-    \begin{proof}
-        The numerator of describes choosing \(k\) linearly independent points from \(V(n, q)\) to span a rank \(k\) subspace. The denominator counts the number of bases in a rank \(k\) subspace.
-    \end{proof}
-    \begin{corollary}
-        The number of rank \(k\) subspaces in \(V(n, q)\) containing a given subspace of rank \(d \leq k\) is 
-        \(\frac{(q^{n - d} - 1)(q^{n - d} - q) \ldots (q^{n - d} - q^{k - d - 1})}{(q^{k - d} - 1) (q^{k - d} - q) \ldots (q^{k - d} - q^{k - d - 1})}\).
-    \end{corollary}
-
-    \begin{lemma}\label{lemma:2}
-        Given two subspaces \(V_1\) and \(V_2\) of a vector space \(V\), \(\dim (V_1 + V_2) = \dim V_1 + \dim V_2 - \dim (V_1 \cap V_2)\).
-    \end{lemma}
-
-    \begin{proof}
-        Let \(V_1\) and \(V_2\) be two subspaces of a vector space \(V\) and consider a basis \(B\) for their intersection \(V_1 \cap V_2\). The basis \(B\) may be extended by adding additional basis vectors to get a basis for \(V_1\) and \(V_2\), we will call these bases \(B_1\) and \(B_2\) respectively.
-        It follows that,
-
-        \begin{equation*}
-            | B_1 \cup B_2 | = |B_1| + |B_2| - |B_1 \cap B_2|
-        \end{equation*}
-
-        Each term describes the dimension of \(V_1 + V_2\), \(V_1\), \(V_2\), and \(V_1 \cap V_2\) respectively.
-    \end{proof}
-
-    We may define the dimension of a projective hyperplane \(H\) in \(\PG(n, q)\) as one less than the dimension of the associated vector space \(V\).
-    \begin{definition}
-        The projective dimension of a hyperplane \(\Pi\) in \(\PG(n, q)\) is one less than the dimension of the associated vector space in \(V(n + 1, q)\).
-    \end{definition}
-
-    \begin{definition}\label{def:1}
-        The span of \(k\) hyperplanes in \(PG(n, q)\), \(\langle \Pi_1, \Pi_2, \ldots, \Pi_k \rangle = \bigcap \{U  | U \subseteq V(n + 1, q) \land \Pi_1 + \Pi_2 + \cdots + \Pi_k \subseteq U \land U \text{is a subspace}\}\)
-    \end{definition}
-    
-    Lemma~\ref{lemma:2} then gives us two immediate corollaries from Definition~\ref{def:1}.
-    \begin{corollary}\label{cor:1}
-        Given two hyperplanes \(\Pi_1\) and \(\Pi_2\) in a finite projective space \(\PG(n, q)\), \(\dim(\langle \Pi_1, \Pi_2 \rangle) = \dim (\Pi_1) + \dim (\Pi_2) - \dim (\Pi_1 \cap \Pi_2)\).
-    \end{corollary}
-
-    \begin{corollary}
-        In \(PG(2, q)\) two distinct lines \(L_1\) and \(L_2\) must always meet a point.
-    \end{corollary}
-    \begin{proof}
-        Using Corollary~\ref{cor:1},
-
-        \begin{equation*}
-            \dim L_1 \cap L_2 = \dim L_1 + \dim L_2 - \dim (\langle L_1, L_2 \rangle) = 0
-        \end{equation*}
-        This relies on the fact that \(L_1 \neq L_2\), so that \(\dim (\langle L_1, L_2 \rangle) = 2\).
-    \end{proof}
-
-    When we start to work with latin squares and hypercubes we will not always have a field to work with, so it helps to define a notion of a projective space that is independent of the concept of a field. To do this we introduce the notion of an axiomatic projective plane (and later an axiomatic projective space of any dimension).
-
-    \begin{definition}
-        A \textit{projective plane} is a set of points \(P\) and lines \(L \subset \mathcal{P}(P)\) such that the following axioms hold:
-
-        \begin{enumerate}[label=Axiom \arabic*.]
-            \item Given any pair of points \(x, y\) there exists a unique line \(l\) such that \(\{x, y\} \subseteq l\).\label{axiom:1}
-            \item Given any pair of lines \(l_1, l_2\) we have \(l_1 \cap l_2 = \{x\}\), that is they intersect at a single point.\label{axiom:2}
-            \item There exists three points that are not collinear (that is not as a subset of any line).\label{axiom:3}
-        \end{enumerate}
-
-        A projective plane is called finite if the point set is finite.
-      \end{definition}
-
-
-    The set of all lines through a point is called the pencil of a point and the set of all points on a line is called the range of the line. The axioms we have defined give a remarkable amount of structure to our geometry.
-    
-    \begin{lemma}
-        Given a line \(l\) and a point \(p \notin l\) in a finite projective plane, the number of lines through \(p\) is equal to the number of points on a line \(l\). 
-    \end{lemma}
-    \begin{proof}
-        Consider an arbitrary point \(p\) not on a line \(l\) in a finite projective plane. Given any point \(q \in l\) our Axiom~\ref{axiom:1} gives us a line through \(p\) and \(q\), so the number of points on \(l\) is at most the number of lines through \(p\). On the other hand,
-        any line through \(p\) must intersect \(l\) by Axiom~\ref{axiom:2}, so the number of points on \(l\) is at least the number of lines through \(p\). Therefore the number of lines through \(p\) is equal to the number of points on \(l\).
-    \end{proof}
-
-    \begin{corollary}
-        Given any two lines \(l_1, l_2\), \(|l_1| = |l_2| = q + 1\) for some positive integer \(q\).
-    \end{corollary}
-    \begin{proof}
-        Consider a point \(p\) not on \(l_1\) and \(l_2\) (note that this may always be done due to Axiom~\ref{axiom:3}) and the set of lines through \(p\), \(L\). The set of points \(P_1\) on \(l_1\) may be put in bijection with \(L\), so \(|P_1| = |L|\). The set of points \(P_2\) on \(l_2\) may also be put in bijection with lines through \(p\),
-        so \(|P_2| = |L| = |P_1| = q + 1\).
-    \end{proof}
-
-    \begin{corollary}
-        If in a finite projective plane with point set \(P\) and line set \(L\) the number of points (lines) incident to a line (point) is \(q + 1\), then \(|P| = |L| = q^2 + q + 1\).
-    \end{corollary}
-    \begin{proof}\label{cor:p-count}
-        Consider an arbitrary point \(p\) in the plane. There are \(q + 1\) lines through \(p\) and each point has \(q + 1\) points, \(q\) excluding \(p\). Thus \(|P| = q(q + 1) + 1\).
-        To see that \(|P| = |L|\) we can double count \(S = \{\{p, l\} | p \in l\}\). Incident to each point \(p\) is \(q + 1\) lines, so \(|S| = (q + 1)|P|\), and incident to each line \(l\) is \(q + 1\) points, so \(|S| = (q + 1)|L|\). Therefore \((q + 1)|P| = (q + 1)|L|\) and \(|P| = |L| = q^2 + q + 1\).
-    \end{proof}
-
-The \(q\) for which \(|P| = q^2 + q + 1\) is called the \textit{order} of the projective plane.
-    As support for later proofs we will want the following lemma,
-
-    \begin{lemma}\label{lemma:easy-proj}
-      A set of \(n^{2} + n + 1\) points \(P\) and \(n^{2} + n + 1\) lines \(L\) such that,
-
-      \begin{enumerate}
-        \item Each line \(l \in L\) has \(n + 1\) points.
-        \item Any pair of lines intersects at exactly one point.
-              \item \(|P| = |L| = n^{2} + n + 1\)
-      \end{enumerate}
-
-      is a projective plane of order \(n\).
-    \end{lemma}
-
-    \begin{proof}
-      Axiom~\ref{axiom:2} is already given, so we need only show Axiom~\ref{axiom:1} and Axiom~\ref{axiom:3}. Axiom~\ref{axiom:2} follows from the fact that because every pair of lines intersects at a unique point, every pair of points must be on at most one line. There are \(\binom{n^{2} + n + 1}{2}\) pairs of points in \(P\) and \((n^{2} + n + 1)\binom{n + 1}{2}\) pairs of points covered by lines in \(L\), and because \(\binom{n^{2} + n + 1}{2} = \frac{(n^{2} + n + 1)(n^{2} + n)}{2} = (n^{2} + n + 1)\frac{n(n + 1)}{2} = (n^{2} + n + 1)\binom{n + 1}{2}\) every pair of points must be on exactly one line. Axiom~\ref{axiom:3} follows from the fact that if I pick a pair of points \(p \ne q\) (which can only exist on one line) and one of the \(n^{2}\) points not on the line determined by \(p\) and \(q\) these points cannot be collinear (due to the unique of a line containing \(p,q\)).
-    \end{proof}
-
-    One question we still haven't answered is for what \(q\) is it possible to construct an axiomatic projective plane? This is an open problem with the following famous conjecture,
-
-    \begin{conjecture}[Prime Power Conjecture]
-        The order of any finite projective plane is always \(p^k\), for some prime \(p\) and integer \(k \geq 1\).
-      \end{conjecture}
-
-      \subsection{Duality}
-
-
-      The axioms of the projective plane are self-dualising, that is if one exchanges the roles of points and lines in Axioms~\ref{axiom:1},~\ref{axiom:2} and~\ref{axiom:3} equivalent axioms will fall out. This duality can produce “dual theorems” that are sometimes useful, for instance the alternative proof
-      that \(|P| = |L|\) in Corollary~\label{cor:p-count} would be to dualise the argument counting points and count the number of lines. Duality can be expressed more in a general projective space \(\PG(d,q)\) by exchanging the roles of points and hyperplanes, span with intersection and the phrases ``contianed in'' with ``containing''.
-      For instance we have the following statement following from Corrolary \ref{cor:1}, the intersection of any two distinct hyperplanes in \(\PG(d, q)\) is a plane with co-dimension 2. The dual statement reads ``the span of any two distinct point in \(\PG(d, q)\) is a line''. We will use ideas of duality to help us work with some tricky hyperplanes.
-    \subsection{Affine Planes}
-
-    An axiomatic affine plane is a perhaps more familiar geometry, with the notion of parallel lines appearing and formally defined.
-
-    \begin{enumerate}[label=Axiom \arabic*.]
-        \item Every two points are incident with a unique line.~\label{axiom:aff-1}
-        \item Given a line \(l\) and a point not on that line \(p\), there exists a line \(m\) through \(p\) such that \(m \cap l = \emptyset\).~\label{axiom:aff-2}
-        \item There are three points that are not collinear.~\label{axiom:aff-3}
-    \end{enumerate}
-
-    We call two lines \(l\) and \(m\) satisfying \(m \cap l = \emptyset\) “parallel”, and we can show that the relationship \(l ~ m\) iff \(l = m\) or \(l\) and \(m\) are parallel is an equivalence relation.
-
-    \begin{lemma}\label{lemma:parallel}
-        Let \(l \sim m\) if and only if \(l = m\) or \(l\) and \(m\) are parallel. \(\sim\) is an equivalence relation.
-    \end{lemma}
-    \begin{proof}
-      From the definition \(~\) is certainly reflexive and symmetric. To see the transitivity property holds, suppose we have a line \(m\) and two lines distinct from \(m\), \(l, l^{\prime}\), such the \(l\) is parallel to \(m\) and \(m\) is parallel to \(l^{\prime}\) but there exists \(p \in l \cap l^{\prime}\).
-      It then follows that because \(m\) is parallel to both \(l\) and \(l^{\prime}\) that \(p \notin m\), Axiom~\ref{axiom:aff-2} says there should be a unique line parallel to \(m\) through \(p\), and therefore \(l = l^{\prime}\). Thus if \(l\) is parallel to \(m\) and \(m\) is parallel to \(l^{\prime}\) then \(l\) is parallel to \(l^{\prime}\).
-    \end{proof}
-
-    Because parallelism forms an equivalence relation we can partition the set of lines into parallel classes, characterised by the fact that they are pairwise parallel to each other. The following housekeeping lemmas will use this fact to show that the number of lines and points in an affine plane can be parameterised by an integer \(n\) which we will call the \textit{order} of the affine plane.
-
-    \begin{lemma}
-      Let \(P_{1}\) and \(P_{2}\) be the parallel classes of two lines \(l_{1}\) and \(l_{2}\) that are not parallel, then \(|P_{1}| = |P_{2}|\).
-    \end{lemma}
-    \begin{proof}
-      Begin by picking a point \(p\) on \(l_{1} \setminus l_{2}\) and \(q\) on \(l_{2} \setminus l_{1}\). The line \(m\) through \(p\) and \(q\) intersects \(l_{1}\) and \(l_{2}\) and is thus in neither parallel class. For each point on \(m \setminus \{p\}\) a there is a unique line passing through \(p\) parallel to \(l_{1}\), each line parallel to \(l_{1}\) must intersect \(m\)
-      (and these no intersection point may be shared by two parallel lines), so it follows that \(|m| = |P_{1}|\). Similar logic follows for lines through \(P_{2}\) and \(m\) so that \(|P_{2}| = |m|\). Thus \(|P_{1}| = |m| = |P_{2}|\).
-    \end{proof}
-
-    The order of the affine plane will be the size of the parallel class.
-
-    \begin{lemma}
-In an affine plane of order \(n\), every line has \(n\) points.
+\begin{lemma}\label{lemma:1}
+  The number of rank \(k\) subspaces in \(V(n, q)\) is \(\frac{(q^n - 1)(q^n - q)\ldots (q^n - q^{k - 1})}{(q^k - 1)(q^k - q)\ldots (q^k - q^{k - 1})}\).
 \end{lemma}
 \begin{proof}
-Following our prior logic, if we pick a line \(l\) and another line \(m\) such that \(m\) is not parallel to \(l\) we may put the points of \(l\) in one to one correspondence with lines in the parallel class of \(l\) so that \(|l| = n\).
+  The numerator of describes choosing \(k\) linearly independent points from \(V(n, q)\) to span a rank \(k\) subspace. The denominator counts the number of bases in a rank \(k\) subspace.
+\end{proof}
+\begin{corollary}
+  The number of rank \(k\) subspaces in \(V(n, q)\) containing a given subspace of rank \(d \leq k\) is
+  \(\frac{(q^{n - d} - 1)(q^{n - d} - q) \ldots (q^{n - d} - q^{k - d - 1})}{(q^{k - d} - 1) (q^{k - d} - q) \ldots (q^{k - d} - q^{k - d - 1})}\).
+\end{corollary}
+
+\begin{lemma}\label{lemma:2}
+  Given two subspaces \(V_1\) and \(V_2\) of a vector space \(V\), \(\dim (V_1 + V_2) = \dim V_1 + \dim V_2 - \dim (V_1 \cap V_2)\).
+\end{lemma}
+
+\begin{proof}
+  Let \(V_1\) and \(V_2\) be two subspaces of a vector space \(V\) and consider a basis \(B\) for their intersection \(V_1 \cap V_2\). The basis \(B\) may be extended by adding additional basis vectors to get a basis for \(V_1\) and \(V_2\), we will call these bases \(B_1\) and \(B_2\) respectively.
+  It follows that,
+
+  \begin{equation*}
+    | B_1 \cup B_2 | = |B_1| + |B_2| - |B_1 \cap B_2|
+  \end{equation*}
+
+  Each term describes the dimension of \(V_1 + V_2\), \(V_1\), \(V_2\), and \(V_1 \cap V_2\) respectively.
+\end{proof}
+
+We may define the dimension of a projective hyperplane \(H\) in \(\PG(n, q)\) as one less than the dimension of the associated vector space \(V\).
+\begin{definition}
+  The projective dimension of a hyperplane \(\Pi\) in \(\PG(n, q)\) is one less than the dimension of the associated vector space in \(V(n + 1, q)\).
+\end{definition}
+
+\begin{definition}\label{def:1}
+  The span of \(k\) hyperplanes in \(PG(n, q)\), \(\langle \Pi_1, \Pi_2, \ldots, \Pi_k \rangle = \bigcap \{U  | U \subseteq V(n + 1, q) \land \Pi_1 + \Pi_2 + \cdots + \Pi_k \subseteq U \land U \text{is a subspace}\}\)
+\end{definition}
+
+Lemma~\ref{lemma:2} then gives us two immediate corollaries from Definition~\ref{def:1}.
+\begin{corollary}\label{cor:1}
+  Given two hyperplanes \(\Pi_1\) and \(\Pi_2\) in a finite projective space \(\PG(n, q)\), \(\dim(\langle \Pi_1, \Pi_2 \rangle) = \dim (\Pi_1) + \dim (\Pi_2) - \dim (\Pi_1 \cap \Pi_2)\).
+\end{corollary}
+
+\begin{corollary}
+  In \(PG(2, q)\) two distinct lines \(L_1\) and \(L_2\) must always meet a point.
+\end{corollary}
+\begin{proof}
+  Using Corollary~\ref{cor:1},
+
+  \begin{equation*}
+    \dim L_1 \cap L_2 = \dim L_1 + \dim L_2 - \dim (\langle L_1, L_2 \rangle) = 0
+  \end{equation*}
+  This relies on the fact that \(L_1 \neq L_2\), so that \(\dim (\langle L_1, L_2 \rangle) = 2\).
+\end{proof}
+
+When we start to work with latin squares and hypercubes we will not always have a field to work with, so it helps to define a notion of a projective space that is independent of the concept of a field. To do this we introduce the notion of an axiomatic projective plane (and later an axiomatic projective space of any dimension).
+
+\begin{definition}
+  A \textit{projective plane} is a set of points \(P\) and lines \(L \subset \mathcal{P}(P)\) such that the following axioms hold:
+
+  \begin{enumerate}
+    \item Given any pair of points \(x, y\) there exists a unique line \(l\) such that \(\{x, y\} \subseteq l\).\label{axiom:1}
+    \item Given any pair of lines \(l_1, l_2\) we have \(l_1 \cap l_2 = \{x\}\), that is they intersect at a single point.\label{axiom:2}
+    \item There exists three points that are not collinear (that is not a subset of any line).\label{axiom:3}
+  \end{enumerate}
+
+  A projective plane is called finite if the point set is finite.
+\end{definition}
+
+
+The axioms we have defined give a remarkable amount of structure to our geometry.
+
+\begin{lemma}
+  Given a line \(l\) and a point \(p \notin l\) in a finite projective plane, the number of lines through \(p\) is equal to the number of points on \(l\).
+\end{lemma}
+\begin{proof}
+  Consider a line \(l\), and a point \(p \notin l\) in a finite projective plane. Given any point \(q \in l\) Axiom~\ref{axiom:1} gives us a line through \(p\) and \(q\), so the number of points on \(l\) is at most the number of lines through \(p\). On the other hand,
+  any line through \(p\) must intersect \(l\) at a single point by Axiom~\ref{axiom:2}, so the number of points on \(l\) is at least the number of lines through \(p\). No two lines through \(p\) can intersect \(l\) at the same point without violating Axiom~\ref{axiom:2}. Therefore the number of lines through \(p\) is equal to the number of points on \(l\).
+\end{proof}
+
+\begin{corollary}
+  Given any two lines \(l_1, l_2\), \(|l_1| = |l_2| = n + 1\) for some positive integer \(n\).
+\end{corollary}
+\begin{proof}
+  Consider a point \(p\) not on \(l_1\) and \(l_2\) (note that this may always be done due to Axiom~\ref{axiom:3}) and let \(L\) be the set of lines through \(p\). The set of points on \(l_{1}\) may be put in bijection with \(L\), so \(|l_{1}| = |L|\). The points on \(l_2\) may also be put in bijection with lines through \(p\),
+  so \(|l_2| = |L| = |l_1| = n + 1\).
+\end{proof}
+
+\begin{corollary}
+  If in a finite projective plane with point set \(P\) and line set \(L\) the number of points (lines) incident to a line (point) is \(n + 1\), then \(|P| = |L| = n^2 + n + 1\).
+\end{corollary}
+\begin{proof}\label{cor:p-count}
+  Consider an arbitrary point \(p\) in the plane. There are \(n + 1\) lines through \(p\) and each of these lines has \(n\) points excluding \(p\). Other than at \(p\) the lines are disjoint, thus \(|P| = n(n + 1) + 1\).
+  To see that \(|P| = |L|\) we can double count \(S = \{\{p, l\} | l \in L, p \in l\}\). Incident to each point \(p\) is \(n + 1\) lines, so \(|S| = (n + 1)|P|\), and incident to each line \(l\) is \(n + 1\) points, so \(|S| = (n + 1)|L|\). Therefore \((n + 1)|P| = (n + 1)|L|\) and \(|P| = |L| = n^2 + n + 1\).
+\end{proof}
+
+The \(n\) for which \(|P| = n^2 + n + 1\) is called the \textit{order} of the projective plane.
+As support for later proofs we will want the following lemma,
+
+\begin{lemma}\label{lemma:easy-proj}
+  A set of \(n^{2} + n + 1\) points \(P\) and \(n^{2} + n + 1\) lines \(L\) such that,
+
+  \begin{enumerate}
+    \item Each line \(l \in L\) has \(n + 1\) points.
+    \item Any pair of lines intersects at exactly one point.
+    \item \(|P| = |L| = n^{2} + n + 1\)
+  \end{enumerate}
+
+  is a projective plane of order \(n\).
+\end{lemma}
+
+\begin{proof}
+  Axiom~\ref{axiom:2} is already given, so we need only show Axiom~\ref{axiom:1} and Axiom~\ref{axiom:3}. Axiom~\ref{axiom:1} follows from the fact that because every pair of lines intersects at a unique point, every pair of points must be on at most one line. There are \(\binom{n^{2} + n + 1}{2}\) pairs of points in \(P\) and \((n^{2} + n + 1)\binom{n + 1}{2}\) pairs of points covered by lines in \(L\), and because \(\binom{n^{2} + n + 1}{2} = (n^{2} + n + 1)\binom{n + 1}{2}\) every pair of points must be on exactly one line. Axiom~\ref{axiom:3} follows from the fact that if I pick a pair of points \(p \ne q\) (which can only exist on one line) and one of the \(n^{2}\) points not on the line determined by \(p\) and \(q\) these points cannot be collinear (due to the uniqueness of a line containing \(p\) and \(q\)).
+\end{proof}
+
+One question we still haven't answered is for what \(q\) is it possible to construct an axiomatic projective plane? This is an open problem with the following famous conjecture,
+
+\begin{conjecture}[Prime Power Conjecture]
+  The order of any finite projective plane is always \(p^k\), for some prime \(p\) and integer \(k \geq 1\).
+\end{conjecture}
+
+% \subsection{Duality}
+
+
+% The axioms of the projective plane are self-dualising, that is if one exchanges the roles of points and lines in Axioms~\ref{axiom:1},~\ref{axiom:2} and~\ref{axiom:3} equivalent axioms will fall out. This duality can produce “dual theorems” that are sometimes useful, for instance the alternative proof
+% that \(|P| = |L|\) in Corollary~\label{cor:p-count} would be to dualise the argument counting points and count the number of lines. Duality can be expressed more in a general projective space \(\PG(d,q)\) by exchanging the roles of points and hyperplanes, span with intersection and the phrases ``contianed in'' with ``containing''.
+% For instance we have the following statement following from Corrolary \ref{cor:1}, the intersection of any two distinct hyperplanes in \(\PG(d, q)\) is a plane with co-dimension 2. The dual statement reads ``the span of any two distinct point in \(\PG(d, q)\) is a line''. We will use ideas of duality to help us work with some tricky hyperplanes.
+\subsection{Affine Planes}
+
+An axiomatic affine plane is a perhaps more familiar geometry, with the notion of parallel lines appearing and formally defined.
+
+\begin{definition}
+
+  An affine plane is a set of points \(P\) and lines \(L \subset \mathcal{P}(P)\) such that the folloming axioms hold:
+
+  \begin{enumerate}[label=Axiom \arabic*.]
+    \item Every two points are incident with a unique line.~\label{axiom:aff-1}
+    \item Given a line \(l\) and a point \(p \notin l\), there exists a line \(m\) through \(p\) such that \(m \cap l = \emptyset\).~\label{axiom:aff-2}
+    \item There are three points that are not collinear.~\label{axiom:aff-3}
+  \end{enumerate}
+\end{definition}
+
+We call two lines \(l\) and \(m\) satisfying \(m \cap l = \emptyset\) “parallel”, and we can show that the natural relationship induced by parallelism is an equivalence relation.
+
+\begin{lemma}\label{lemma:parallel}
+  For any pair of lines \(l, m\) in an affine plane, let \(l \sim m\) if and only if \(l = m\) or \(l\) and \(m\) are parallel, \(\sim\) is an equivalence relation.
+\end{lemma}
+\begin{proof}
+  From the definition of \(~\) and parallelism, \(\sim\) is clearly reflexive and symmetric. To see that the transitivity property holds, suppose we have a line \(m\) and two lines \(l, l^{\prime}\) distinct from \(m\), such the \(l\) is parallel to \(m\) and \(m\) is parallel to \(l^{\prime}\) but there exists \(p \in l \cap l^{\prime}\).
+  It then follows that because \(m\) is parallel to both \(l\) and \(l^{\prime}\) that \(p \notin m\), Axiom~\ref{axiom:aff-2} says there should be a unique line parallel to \(m\) through \(p\), and therefore \(l = l^{\prime}\). Thus if \(l\) is parallel to \(m\) and \(m\) is parallel to \(l^{\prime}\) then \(l\) is parallel to \(l^{\prime}\).
+\end{proof}
+
+Because parallelism forms an equivalence relation we can partition the set of lines into parallel classes, characterised by the fact that they are pairwise parallel to each other. The following housekeeping lemmas will use this fact to show that the number of lines and points in an affine plane can be parameterised by an integer \(n\) which we will call the \textit{order} of the affine plane.
+
+\begin{lemma}\label{lemma:parallelclasses}
+  Let \(P_{1}\) and \(P_{2}\) be the parallel classes of two lines \(l_{1}\) and \(l_{2}\) that are not parallel, then \(|P_{1}| = |P_{2}|\).
+\end{lemma}
+\begin{proof}
+  Begin by picking a point \(p\) on \(l_{1} \setminus l_{2}\) and \(q\) on \(l_{2} \setminus l_{1}\). The line \(m\) through \(p\) and \(q\) intersects \(l_{1}\) and \(l_{2}\) and is thus in neither parallel class. For each point on \(m \setminus \{p\}\) a there is a unique line passing through \(p\) parallel to \(l_{1}\), each line parallel to \(l_{1}\) must intersect \(m\)
+  (and these no intersection point may be shared by two parallel lines), so it follows that \(|m| = |P_{1}|\). Similar logic follows for lines through \(P_{2}\) and \(m\) so that \(|P_{2}| = |m|\). Thus \(|P_{1}| = |m| = |P_{2}|\).
+\end{proof}
+
+The order of the affine plane will be the size of the parallel class.
+
+\begin{lemma}
+  In an affine plane of order \(n\), every line has \(n\) points.
+\end{lemma}
+\begin{proof}
+  Following our prior logic in Lemma~\ref{lemma:parallelclasses}, if we pick a line \(l\) and another line \(m\) such that \(m\) is not parallel to \(l\) we may put the points of \(l\) in one to one correspondence with lines in the parallel class of \(m\) so that \(|l| = n\).
 \end{proof}
 
 \begin{lemma}
-There are \(n^{2}\) points in an affine plane of order \(n\).
+  An affine plane of order \(n\) has \(n^{2}\) points.
 \end{lemma}
 \begin{proof}
   Pick a line \(l\) and it's parallel class \(P\). For any point \(p\) either \(p \in l\) or there is a unique line \(m\) parallel to \(l\) through \(p\). At the same time \(l_{1} \cap l_{2} = \emptyset\) for any pair of distinct lines \(l_{1}\) and \(l_{2}\) in \(P\). Therefore the lines of \(P\) partition the point set of the affine plane.
@@ -211,220 +222,198 @@ There are \(n^{2}\) points in an affine plane of order \(n\).
 \end{proof}
 
 \begin{lemma}
-In an affine plane of order \(n\) there is \(n(n + 1)\) lines.
+  An affine plane of order \(n\) has \(n(n + 1)\) lines.
 \end{lemma}
 
 \begin{proof}
   Picking any two distinct points we can construct a unique line through both, and for any line we pick any pair of points that determine the same line. Therefore there are
 
-  \begin{equation}
-\frac{\binom{n^{2}}{2}}{\binom{n}{2}} = n(n + 1)
-\end{equation}
+  \begin{equation*}
+    \frac{\binom{n^{2}}{2}}{\binom{n}{2}} = n(n + 1)
+  \end{equation*}
 
-distinct lines in an the affine plane of order \(n\).
+  distinct lines in an the affine plane of order \(n\).
 \end{proof}
 
 \begin{lemma}
-In an affine plane of order \(n\) every point has \(n + 1\) points incident to it.
+  In an affine plane of order \(n\) every point has \(n + 1\) lines incident to it.
 \end{lemma}
 \begin{proof}
-  Fix a point \(p\) in the plane. Picking one of the \(n^{2} - 1\) points \(q\) will determine a line through \(p\). For each pair \((p, q)\) spanning a line \(l\), \(n - 1\) other choices for \(q\) would've spaned the same line, so the number of lines through a point is
+  Fix a point \(p\) in the plane. Picking one of the \(n^{2} - 1\) points besides \(p\), \(q\), will determine a line through \(p\). For each pair \((p, q)\) spanning a line \(l\), \(n - 1\) other choices for \(q\) would've spaned the same line, so the number of lines through \(p\) is
 
   \begin{equation}
-\frac{n^{2} - 1}{n - 1} = n + 1
-\end{equation}
+    \frac{n^{2} - 1}{n - 1} = n + 1.
+  \end{equation}
 \end{proof}
 
 The relationship between projective planes and affine planes is predictably close, in fact the existence of an affine plane is equivalent to the existence of a projective plane.
 
 \begin{theorem}
-The existence of an affine plane of order \(n\) is equivalent to the existence of a projective plane of order \(n\).
+  The existence of an affine plane of order \(n\) is equivalent to the existence of a projective plane of order \(n\).
 \end{theorem}
 \begin{proof}
   Assume we have an affine plane of order \(n\) with points \(P\) and lines \(L\). Partition the set of lines in the plane \(L\) into parallel classes \(P_{1}, P_{2}, \ldots, P_{n + 1}\). Add \(n + 1\) points \(E_{1}, E_{2}, \ldots, E_{n + 1}\) to \(P\) representing each parallel class and add a line \(L_{\infty} = \{E_{i} | 1 \le i \le n + 1\}\) to \(L\).
-  Then for each line \(l \in L\) we will add the point \(E_{i}\) to \(l\) where \(E_{i}\) represents the parallel class \(P_{i}\) that \(l\) belongs to. We now have \(n^{2} + n + 1\) points, and \(n^{2} + n + 1\) lines with the property that any pair of lines intersects at exactly one point, each nonparallel line in the affine plane will still intersect at a single point and every parallel line will now intersect at \(l_{\infty}\) as they belong to the same parallel class. From Lemma~\ref{lemma:easy-proj} this implies our points and lines form a projective plane of order \(n\).
+  Then for each line \(l \in L\) we will add the point \(E_{i}\) to \(l\) where \(E_{i}\) represents the parallel class \(P_{i}\) that \(l\) belongs to. We now have \(n^{2} + n + 1\) points, and \(n^{2} + n + 1\) lines with the property that any pair of lines intersects at exactly one point, (each nonparallel line in the affine plane will still intersect at a single point and every parallel line will now intersect at \(l_{\infty}\) as they belong to the same parallel class). From Lemma~\ref{lemma:easy-proj} this implies our points and lines form a projective plane of order \(n\).
+
+  Now assume we are given a projective plane of order \(n\) with points \(P\) and lines \(L\). Pick any line \(l \in L\) and let \(L^{\prime} = \{l^{\prime} \setminus l | l^{\prime} \in L \setminus {l}\}\) and \(P^{\prime} = P \setminus l\). We will now show \(P^{\prime}\) and \(L^{\prime}\) forms an affine plane of order \(n\).
+  The lines in \(L^{\prime}\) may be partitioned into classes \(\{P_{1}, P_{2}, \ldots, P_{n + 1}\}\), one class for each point \(p \in l\) containing each of the \(n\) lines apart from \(l\) incident to \(p\) in the projective plane. Because each pair of lines in a projective plane intersects at one point the lines in \(P_{i}\) must be parallel (having removed their intersection on \(l\)), and moreover as the lines have \(n\) points each and \(|P_{i}| = n\) they partition the points and satisfy Axiom~\ref{axiom:aff-2} of an affine plane.
+  Lines from distinct parallel classes must intersect at a unique point in \(P^{\prime}\) as they intersected at a unique point not on \(l\) in the projective plane. Any pair of points in \(P^{\prime}\) will still have a line through both as they did in the projective plane. A set of three points that are not collinear may be obtained by taking two points on a given line \(m \in L^{\prime}\) and a single point not on \(m\), these points cannot be collinear. Thus \((P^{\prime}, L^{\prime})\) forms an affine plane of order \(n\).
 \end{proof}
 
 \subsection{\(k\)-nets of order \(n\)}
 
 
-\begin{definition}
-  A net degree \(k \geq 2\) and order \(n\) (hereafter a \(k\)-net of order \(n\)) is a set of \(n^2\) points and \(k\) parallel classes such that each parallel class consists of \(n\)
-  disjoint lines of size \(n\) and such thta lines of distinct parallel classes meet in a unique point.
+\begin{definition}\label{def:net}
+  A net of degree \(k \geq 2\) and order \(n\) (hereafter a \(k\)-net of order \(n\)) is a set of \(n^2\) points and \(k\) parallel classes such that each parallel class consists of \(n\)
+  disjoint lines of size \(n\) and such that lines of distinct parallel classes meet in a unique point.
 \end{definition}
 
-\(k\)-nets can be thought of as a generalisation of the incidence properties an affine plane, indeed the following lemma establishes that affine planes are a special case of affine planes.
+\(k\)-nets can be thought of as a generalisation of the incidence properties of an affine plane, indeed the following lemma establishes that affine planes are a special case of \(k\)-nets of order \(n\).
 
 \begin{lemma}
-An \(n + 1\)-net of order \(n \geq 2\) is an affine plane of order \(n\).
+  An \((n + 1)\)-net of order \(n \geq 2\) is an affine plane of order \(n\).
 \end{lemma}
 
 \begin{proof}
-  Suppose we have an (n + 1)-net of order \(n\), we will show that the axioms for an affine plane follow from those of the net. 
-  Axiom~\ref{axiom:aff-1} directly follows from the definition of a net, as every pair of lines is either parallel or intersecting in a single point. The next axiom,~\ref{axiom:aff-2}, follows from the fact that because the parallel classes partition the plane, 
-  given a line \(l\) identifying a parallel class and a point \(p\) not on that line there is a single line in the parallel class through \(p\). The third axiom, Axiom~\ref{axiom:aff-3} follows from the fact that if \(n \geq 2\) one can identify 3 points, which cannot be included on the same line. 
+  Suppose we have an (n + 1)-net of order \(n\), we will show that the axioms for an affine plane follow from those of the net.
+  Axiom~\ref{axiom:aff-1} directly follows from the definition of a net, as every pair of lines is either parallel or intersecting in a single point. The next axiom,~\ref{axiom:aff-2}, follows from the fact that because the parallel classes partition the plane,
+  given a line \(l\) identifying a parallel class and a point \(p\) not on that line there is a single line in the parallel class through \(p\). The third axiom, Axiom~\ref{axiom:aff-3} follows from the fact that if \(n \geq 2\) one can identify 3 points, two on one line \(l\), and a third not on \(l\), these points cannot be collinear.
 \end{proof}
 
 Because each parallel class partitions the point set every point in a \(k\)-net of order \(n\) is incident to \(k\) lines, one from each parallel class.
 
-One remarkable property of a \(n\)-net of order \(n\) is that they may be extended uniquely to an affine plane. This will be used later to show some interesting theorems about mutually orthogonal latin squares.
+One remarkable property of a \(n\)-net of order \(n\) is that it may be extended uniquely to an affine plane. This will be used later to show some interesting theorems about mutually orthogonal latin squares.
 
 \begin{lemma}\label{lemma:net-extension}
-An \(n\)-net of order \(n\) may be extended to an \((n + 1)\)-net of order \(n\).
+  An \(n\)-net of order \(n\) may be extended to an \((n + 1)\)-net of order \(n\).
 \end{lemma}
 
 \begin{proof}
-  We will begin by constructing a set of \(n\) parallel lines. 
+  We will begin by constructing a set of \(n\) parallel lines.
   The procedure to do this will be to pick a point \(p_{1}\) from among the set of \(n^{2}\) points in the net, and construct the line \(l_{1}\) consisting of all points not on any line through \(p_{1}\) plus \(p_{1}\) itself. Because \(p_{1}\) is on \(n\) lines concurrent at \(p_{1}\) only, there are \(n^{2} - n(n - 1) - 1 = n - 1\) points not covered by any line through \(p_{1}\) and therefore \(|l_{1}| = n\). The next line \(l_{2}\) will be constructed by picking \(p_{2} \notin l_{1}\) and taking the set of points not on any line through \(p_{2}\), and so on to get a set of \(n\) lines and points \(p_{1}, l_{1}, p_{2}, l_{2}, \ldots, p_{n}, l_{n}\). To see that the lines are disjoint we are going to show that the relationship \(p \sim q \iff p = q \text{or p and q are not on a line together}\) is an equivalence relation. Reflexivity and symmetry are clear so it just remains to show that the relationship is transitive. Suppose I have three distinct points \(p, q, r\) such that \(p\) and \(q\) are not on a line together, \(q\) and \(r\) are not on a line together, but \(p\) and \(r\) are on a line together.
   By our net axioms there is exactly one line through \(q\) that is parallel to \(pr\). Other than that the remaining \(n - 1\) lines through \(q\) must intersect the line \(pr\) in one of \(n\) points on \(pr\) except \(p\) and \(r\) since \(q\) is on a line with neither. However by the pigeonhole principle we conclude that two lines through \(q\) must intersect at the same point on the line \(pr\) and by contradiction we conclude that \(p\) cannot be collinear with \(r\). Because the collinearity relationship is an equivalence relation the lines form equivalence classes that partition the plane. All that needs to be checked then is that these new lines do not intersect twice with another line from the original net. If \(l_{i}\) is a line constructed from points not collinear with \(p_{i}\) and \(m\) a line from the original net, assume that \(\{p, q\} \subseteq l_{i} \cap m\). By taking the unique parallel lines through each point in \(l_{i} \setminus m\) we have \(n - 1\) lines that must intersect with at most \(n - 2\) points in \(l_{i} \setminus m\), so at least two lines must intersect at the same point in \(l_{i} \setminus m\) --- which contradicts the parallel properties of these lines. Thus we have an \((n + 1)\)-net of order \(n\).
 \end{proof}
-    \section{Projective Spaces and Orthogonal Hypercubes}
-    
-
-    \begin{definition}
-        A latin square of order \(n\) is an \(n \times n\) array, where each entry in the array is assigned one of \(n\) symbols such that every symbol appears exactly once in each row and each column.
-    \end{definition}
-
-    For any order \(n \geq 2\) a latin square may always be constructed by constructing the array \(A = [a_{ij}]\) where \(a_{ij} = i + j\). Because \(\mathbb{Z}_n\) is a group under addition for all \(n\) it follows that \(A\) each row and column should have each element exactly once (since the equation \(i + j = c\) has a unique solution when fixing either of \(i\) or \(j\)).
-
-    Given two latin squares we say they are orthogonal if when overlaying the first square over the second each of the \(n^2\) possible ordered pair of symbols appears exactly once.
-    A set of latin squares is \textit{mutually orthogonal} it is pairwise orthogonal. Lemma 1 answers the quesiton ``What is the largest set of mutually orthogonal latin squares for a given order?''.
-
-    \begin{lemma}
-        Let \(M\) be a set of mutually orthogonal latin squares of order \(n \geq 2\), then \(|M| \leq n - 1\).
-    \end{lemma}
-    \begin{proof}
-        Let \(M = {A^i}\) be a set of mutually orthogonal latin squares \(A^i, 1 \leq i \leq |M|\) of order \(n \geq 2\). Without loss of generality we may assume that the first row of each latin square is given by \(1, 2, 3, \ldots n\), because we may permute symbols to make this so if it isn't already for any given latin square without affecting orthogonality.
-        We will now count the set \(N = \{A^1_{21}, A^2_{21}, \ldots, A^{|M|}_{21}\}\). Because the symbol above \(A^i_{21}\) is fixed to one \(A^i_{21} \in {2, 3, \ldots, n}\) for each \(i\), and moreover because \((A^i_{1k}, A^j_{1k}) = (k, k)\) for each \(1 \leq i, j \leq |M|, 1 \leq k \leq n\) we cannot have \(A^i_{21} = A^j_{21}\) for any \(1 \leq i, j \leq |M|\).
-        It therefore follows that \(N\) is a permutation of \({2, 3, \ldots, n}\) and \(|N| = n - 1\).
-    \end{proof}
+\section{Projective Spaces and Orthogonal Hypercubes}
 
 
-    \begin{theorem}~\label{thm:mols}
-        A set of \(n - 1\) mutually orthogonal latin squares of order \(n\) always exists if n is a prime power.
-    \end{theorem}
-    \begin{proof}
-        Consider \(PG(2, n)\), which always exists for prime powers, and the line at infinity \(L_{\infty}\). Distinguish two of the \(n + 1\) points on this line as \(r\) and \(c\) respectively. 
-        We will call the \(n\) lines through \(r\) (excluding the line at infinity) our row lines, and the \(n\) lines through \(c\) our column lines, generically these lines are referred to as coordinate lines.
-        Each pair of lines has a unique intersection that is by construction among the \(n^2\) points not on the line at infinity, and because every pair of points has a unique line through it, each of the \(n ^ 2\) points has a unique pair of coordinate lines that intersect at it.
-        It therefore makes sense to coordinatise the remaining points in the plane with reference to their intersection of coordinate lines. Because a latin square also has \(n ^ 2\) entries, we will coordinatise the entries of a latin square according to intersections of the coordinate lines.
-        The remaining \(n - 1\) points on the line at infinity each have \(n\) lines through them (excluding the line at infinity) and these lines we will refer to as symbol lines. Each of the \(n - 1\) points will be used to define a latin square. Fix a point in \(L_{\infty} - \{r, c\}\) and call it \(L_i\). 
-        Where each symbol line \(S_j\) through \(L_i\) intersects the remaining \(n^2\) points we will place the symbol \(j\) in the corresponding entries of the \(i\)th latin square. Because each symbol line intersects each coordinate line only once, each row and column has exactly one of each symbol.
-        Taking the set of \(n - 1\) latin squares defined in this fashion we need only show orthogonality. Given two symbol lines \(S_i\) and \(S_j\) from two different latin squares we know that these intersect at a single point which cannot be in the line at infinity. 
-        Where the symbol lines intersect is therefore the only place where \((i, j)\) appears upon overlapping the two latin squares and so the set of \(n - 1\) latin squares we have defined is mutually orthogonal. 
-      \end{proof}
+\begin{definition}
+  A latin square of order \(n\) is an \(n \times n\) array, where each entry in the array is assigned one of \(n\) symbols such that every symbol appears exactly once in each row and each column.
+\end{definition}
 
-      We can also go the other way and show that the existence of a complete set of mutually orthogonal latin squares of order \(n\) is equivalent to the existence of a projective plane of order \(n\).
+Given two latin squares we say they are \textit{orthogonal} if when overlaying the first square over the second each of the \(n^2\) possible ordered pair of symbols appears exactly once.
+A set of \(M \geq 2\) of latin squares is \textit{mutually orthogonal} it is pairwise orthogonal, this is often abbreviated to a MOLS of order \(n\). Lemma 1 answers the quesiton ``What is the largest set of mutually orthogonal latin squares of a given order?''
 
-      \begin{theorem}\label{thm:mols-to-net}
-        The existence of \(k\) mutually orthogonal latin squares of order \(n\) is implies the existence of a \(k + 2\)-net of order \(n\).
-      \end{theorem}
-      \begin{proof}
-        Suppose we have a complete set of \(k\) MOLS \(M = \{A^{1}, A^{2}, \ldots, A^{k}\}\) of order \(n\). Let \(P = \{(x, y) | x, y \in \mathbb{Z}_{n}\}\), be a set of \(n^{2}\) points. Let our lines be the \(kn + 2n = (k + 2)n\) lines constructed by taking \(L_{j}^{i} = \{(x, y) | (x, y) \in P \land A^{i}_{x,y} = j\}\) for \(1 \le i \le n - 1, j \in \mathbb{Z}_{n}\) and the \(2n\) lines \(R_{i} = \{(x, i) | x \in \mathbb{Z}_{n}\}\) and \(C_{j} = \{(j, y) | y \in \mathbb{Z}_{n}\}\) for each \(i, j \in \mathbb{Z}_{n}\). Because we get one occurence of the symbol \(j\) in each row of a latin square \(A^{i}\), \(|L_{j}^{i}| = n\). We may partition the line set into \(k + 2\) parallel classes, each of the \(k\) classes \(P_{i} = \{L_{1}^{i}, L_{2}^{i}, \ldots, L_{n}^{i}\}\) plus the row class \(R = \{R_{1}, R_{2}, \ldots, R_{n}\}\) and column class \(C = \{C_{1}, C_{2}, \ldots, C_{n}\}\). The lines in the row and column classes are clearly parallel, and the lines in the latin square classes are parallel because no two symbols are assigned to the same position in a given latin square. In addition no two lines from distinct parallel classes are parallel, because each line \(L_{j}^{i}\) intersects every row and column line once (one symbol in each row and column by definition) and because \(A^{i}\) and \(A^{k}\) are orthogonal for \(i \neq k\), there is a unique intersection of the lines \(L^{i}_{j}\) and \(L^{k}_{l}\) for all \(i \ne k, j, l\). Each point \((x, y)\) will have a single line from each parallel class incident to it, namely \(R_{x}\), \(C_{y}\) and for each \(1 \le i \le k\) the line \(L^{i}_{j}\) is incident to \((x, y)\) if and only if \(A^{i}_{x, y} = j\). So we have a set of points and lines such that each of the \((k + 2)n\) lines has \(n\) points, each belongs to one of \(k\) parallel classes with \(n\) lines each, and every point is incident to \(k\) lines (one from each class). It follows that by definition the set of points \(P\) and lines \(\{L_{j}^{i} | 1 \le i \le n - 1\} \cup \{R_{x} | x \in \mathbb{Z}_{n}\} \cup \{C_{y} | y \in \mathbb{Z}_{n}\}\) forms a \((k + 2)\)-net of order \(n\).
-      \end{proof}
+\begin{lemma}
+  Let \(M\) be a set of mutually orthogonal latin squares of order \(n \geq 2\), then \(|M| \leq n - 1\).
+\end{lemma}
+\begin{proof}
+  Let \(M = {A^i}\) be a set of mutually orthogonal latin squares \(A^i, 1 \leq i \leq |M|\) of order \(n \geq 2\). Without loss of generality we may assume that the first row of each latin square is given by \(1, 2, 3, \ldots n\), because we may permute symbols to make this so if it isn't already for any given latin square without affecting orthogonality.
+  We will now count the set \(N = \{A^1_{21}, A^2_{21}, \ldots, A^{|M|}_{21}\}\). Because the symbol above \(A^i_{21}\) is fixed to one \(A^i_{21} \in {2, 3, \ldots, n}\) for each \(i\), and moreover because \((A^i_{1k}, A^j_{1k}) = (k, k)\) for each \(1 \leq i, j \leq |M|, 1 \leq k \leq n\) we cannot have \(A^i_{21} = A^j_{21}\) for any \(1 \leq i, j \leq |M|\).
+  It therefore follows that \(N\) is a permutation of \({2, 3, \ldots, n}\) and \(|N| = n - 1\).
+\end{proof}
 
-      \begin{corollary}
-        The existence of a set of \(n - 1\) MOLS of order \(n\) is equivalent to the existence of an affine plane of order \(n\).
-      \end{corollary}
-      \begin{corollary}\label{cor:proj-MOLS}
-        The existence of a set of \(n - 1\) MOLS of order \(n\) is equivalent to the existence of a projective plane of order \(n\).
-      \end{corollary}
+We call a set of \(M = n - 1\) mutually orthogonal latin squares of order \(n\) a \textit{complete set}.
 
-      One can also extend a set of \(n - 2\) MOLS of order \(n\) to a set of \(n - 1\) MOLS of order \(n\).
-
-      \begin{theorem}
-        A set of \(n - 2\) MOLS of order \(n\) may be extended to a \(n - 1\) MOLS exists of order \(n\).
-      \end{theorem}
-
-      \begin{proof}
-        Assume we have a set of \(n - 2\) MOLS of order \(n\), \(M = \{A^{1}, A^{2}, \ldots, A^{n - 2}\}\). Using Theorem~\ref{thm:mols-to-net} we may take \(M\) and construct a \(n\)-net, and then using Lemma~\ref{lemma:net-extension} obtain a \(n + 1\)-net of order \(n\). Then by Corollary~\ref{cor:proj-MOLS} and Theorem~\ref{thm:mols} we can construct a set of \(n - 1\) MOLS, \(n - 2\) will be the original MOLS in \(M\) and the last coming from the extension in Lemma~\ref{lemma:net-extension}.
-      \end{proof}
+\begin{theorem}~\label{thm:mols}
+  A set of \(n - 1\) mutually orthogonal latin squares of order \(n\) always exists if n is a prime power.
+\end{theorem}
+\begin{proof}
+  Consider \(PG(2, n)\), which always exists for prime powers, and the line at infinity \(L_{\infty}\). Distinguish two of the \(n + 1\) points on this line as \(r\) and \(c\) respectively.
+  We will call the \(n\) lines through \(r\) (excluding the line at infinity) our row lines, and the \(n\) lines through \(c\) our column lines, generically these lines are referred to as coordinate lines.
+  Each pair of lines has a unique intersection that is by construction among the \(n^2\) points not on the line at infinity, and because every pair of points has a unique line through it, we may coordinatise the entries of a latin square according to intersections of coordinate lines.
+  The remaining \(n - 1\) points on the line at infinity each have \(n\) lines through them (excluding the line at infinity) and these lines we will refer to as symbol lines. Each of the \(n - 1\) points will be used to define a latin square. Fix a point in \(L_{\infty} - \{r, c\}\) and call it \(L_i\). There are \(n\) lines through \(L_{i}\) excluding \(L_{\infty}\), \(S_{1}^{i}, S_{2}^{i}, \ldots, S^{i}_{n}\).
+  The latin square \(A^{i}\) will be constructed by letting \(A^{i}_{x,y} = j\) if and only if the affine point \((x, y, 1)\) lies on \(S^{i}_{j}\). Because each symbol line intersects each coordinate line only once, each row and column has exactly one of each symbol.
+  Taking the set of \(n - 1\) latin squares defined in this fashion we need only show orthogonality. Given two symbol lines \(S_i\) and \(S_j\) from two different latin squares we know that these intersect at a single point which cannot be in the line at infinity.
+  Where the symbol lines intersect is therefore the only place where \((i, j)\) appears upon overlapping the two latin squares and so the set of \(n - 1\) latin squares we have defined is mutually orthogonal.
+\end{proof}
 
 
-      We will attempt to generalise some of our results to latin squares in higher dimensions, but first we need some definitions of what that even means.
-    \begin{definition}\label{def:hypercube}
-        A (d, n, r, t)-hypercube of dimension \(d\), order \(n\), class \(r\) and type \(t\) is an \(n \times n \times \cdots \times n\) (\(d\) times) array on \(n^r\) distinct symbols such that in every co-dimension-t-subarray (that is, fix \(t\) coordinates and allow the remaining \(d - t\) coordinates to vary) each of the \(n^r\)
-        distinct symbols appears exactly \(n^{d - t - r}\) times.
-        Moreover, if \(d \geq 2r\) two such hypercubes are \textit{orthogonal} if when superimposed each of the \(n^{2r}\) possible distinct pairs appears exactly \(n^{d - 2r}\) times. A set of hypercubes is mutually orthogonal if each pair of hypercubes in the set are orthogonal.
-    \end{definition}
+Theorem~\ref{thm:mols} may seem redundant in light of what follows in Theorem~\ref{thm:mols-to-net}, however the logic in the proof of Theorem~\ref{thm:mols} is crucial to understanding the setup for Theorem~\ref{thm:general-ortho-proof} later on so keep this slightly repititive thinking in mind.
+Theorem~\ref{thm:mols-to-net} seeks to find a constructive equivalence between a net and a set of MOLS.
 
-    The familiar latin square is a \((2, n, 1, 0)\)-hypercube. We will be interested in extending the classic result given in Theorem~\ref{thm:mols}, to do this we require a 
-    theorem that bounds the size of a mutually orthogonal set of hypercubes of dimension \(d\), order \(n\), type \(t\) and class \(r\). In~\cite{ethier2012sets} we have the following theorem bounding sets of MOHC:
+\begin{theorem}\label{thm:mols-to-net}
+  The existence of \(k\) mutually orthogonal latin squares of order \(n\) is equivalent to the existence of a \(k + 2\)-net of order \(n\).
+\end{theorem}
+\begin{proof}
 
-    \begin{theorem}~\label{thm:mut-ortho}
-        The maximum number of mutually orthogonal hypercubes of dimension \(d\), order \(n\), type \(t\) and class \(r\) is bounded above by
+  Suppose we have a set of \(k\) MOLS of order \(n\) \(M = \{A^{1}, A^{2}, \ldots, A^{k}\}\).
+  Let \(P = \mathbb{Z}_{n}^{2}\) be a set of \(n^{2}\) points. To create a \((k + 2)\)-net of order \(n\) we need to create \(k + 2\) parallel classes.
+  Our rows and columns, \(r_{i} = \{(i, y) | y \in \mathbb{Z}_{n}\}\)  and \(c_{j} = \{(x, j) | x \in \mathbb{Z}_{n}\}\), form our first two parallel classes \(R\) and \(C\) respectively.
+  For each latin square \(A^{i} \in M\) we let \(P_{i} = \{l_{1}^{i}, l_{2}^{i}, \ldots, l_{n}^{i}\}\) be the parallel class constructed with \((x, y) \in l_{j}^{i}\) if and only if \(A^{i}_{x, y} = j\). Clearly each pair of lines in \(R\) and \(C\) intersect at exactly one point.
+  Because no position in \(A^{i}\) is assigned twice the lines in \(P_{i}\) are indeed parallel.
+  Because each symbol \(j\) appears once in \(A^{i}\) for each row and column it follows that each line in \(P_{i}\) has \(n\) points and intersects each line in \(R\) and \(C\) just once. As \(M\) is mutually orthogonal the lines \(l_{j} \in P_{i}\) and \(l_{k} \in P_{l}\) (\(i \neq l\)) intersect at exactly one point.
+  So we have a set of \(k + 2\) parallel classes of \(n\) lines containing \(n\) points meeting Definition~\ref{def:net}.
 
-        \begin{equation}
-            \frac{1}{n^r - 1}\left(n^d - 1 - \binom{d}{1}(n - 1) - \binom{d}{2}{(n - 1)}^2 - \cdots - \binom{d}{t} {(n - 1)}^t\right). \label{eq:ortho-bound}
-        \end{equation}
+  Starting from a \((k + 2)\)-net of order \(n\), pick two distinct parallel classes \(R = \{r_{1}, r_{2}, \ldots, r_{n}\}\) and \(C = \{c_{1}, c_{2}, \ldots, c_{n}\}\). To coordinatise the points, let \(\varphi(x, y) = p\) if and only \(r_{x} \cap c_{y} = \{p\}\). To see that \(\varphi\) is one to one, suppose \(\varphi(x, y) = \varphi(x^{\prime}, y^{\prime})\)
+  and WLOG assume \(x \neq x^{\prime}\) (the case \(y \neq y^{\prime}\) is identical), then \(r_{x} \cap c_{y} = r_{x^{\prime}} \cap c_{y^{\prime}} = \{p\}\) which implies \(r_{x} \cap r_{x^{\prime}} \neq \emptyset\), this is a contradiction as we know these lines are parallel. Because \(|\mathbb{Z}_{n}^{2}| = |P| = n^{2}\) and \(\varphi\) is one to one we may also conclude \(\varphi\) is onto and bijective.
+  From the remaining classes \(\{P_{1}, P_{2}, \ldots, P_{k}\}\) we will construct a set of \(k\) MOLS of order \(n\), \(M = \{A^{1}, A^{2}, \ldots, A^{k}\}\).
+  For each of the \(n\) lines in \(P_{i}\), \(\{l_{1}, l_{2}, \ldots, l_{n}\}\), \(A^{i}_{x,y} = j\) if and only \(\varphi(x, y) \in l_{j}\). Because two lines from distinct parallel classes intersect at a unique point,
+  it follows that \(A^{i}\) is a latin square as each line from \(P_{i}\) intersect each line in \(R\) and \(C\) just once. Given two latin squares \(A^{i}\) and \(A^{j}\) we know they are orthogonal as the lines defining the placement of symbols in \(A^{i}\) and \(A^{j}\) are from distinct parallel classes
+  and therefore intersect once. Thus \(M\) is a mutually orthogonal set of latin squares of order \(n\).
+\end{proof}
+\begin{corollary}
+  The existence of a set of \(n - 1\) MOLS of order \(n\) is equivalent to the existence of an affine plane of order \(n\).
+\end{corollary}
+\begin{corollary}\label{cor:proj-MOLS}
+  The existence of a set of \(n - 1\) MOLS of order \(n\) is equivalent to the existence of a projective plane of order \(n\).
+\end{corollary}
 
-    \end{theorem}
+One can also extend a set of \(n - 2\) MOLS of order \(n\) to a set of \(n - 1\) MOLS of order \(n\).
 
-    A complete set of mutually orthogonal \((d,n,r,t)\)-hypercubes is a set of MOHC attaining the bound given by~\eqref{eq:ortho-bound}.For the machinery of the approaching theorem we also require this small result, 
+\begin{theorem}
+  A set of \(n - 2\) MOLS of order \(n\) may be extended to a \(n - 1\) MOLS of order \(n\).
+\end{theorem}
 
-    \begin{lemma}\label{lemma:3}
-        In \(PG(3, q)\) if any three distinct planes do not intersect at a common line, they must intersect at a point. 
-    \end{lemma}
-    \begin{proof}
-        Consider three distinct planes \(\Pi_1, \Pi_2, \Pi_3\) in \(PG(3, q)\) whose intersection is not a line. By an extension of Lemma~\ref{lemma:2} and treating each projective plane as subspaces of \(V(4, q)\),
-        
-        \begin{equation*}
-            \dim (\Pi_1 + \Pi_2 + \Pi_3) = \sum_{i} \dim \Pi_i - \sum_{i \neq j} \dim \Pi_i \cap \Pi_j + \dim \Pi_1 \cap \Pi_2 \cap \Pi_3.
-        \end{equation*}
+\begin{proof}
+  Assume we have a set of \(n - 2\) MOLS of order \(n\), \(M = \{A^{1}, A^{2}, \ldots, A^{n - 2}\}\). Using Theorem~\ref{thm:mols-to-net} we may take \(M\) and construct a \(n\)-net, and then using Lemma~\ref{lemma:net-extension} obtain a \(n + 1\)-net of order \(n\). Then by Corollary~\ref{cor:proj-MOLS} and Theorem~\ref{thm:mols} we can construct a set of \(n - 1\) MOLS, \(n - 2\) will be the original MOLS in \(M\) and the last coming from the extension in Lemma~\ref{lemma:net-extension}.
+\end{proof}
 
-        The intersection of any pair of these planes must be a line (by the same logic as Lemma~\ref{lemma:2}). Because these planes are distinct, and because they do not intersect at a common line, their sum must span \(V(4, q)\) and so \(\dim (\Pi_1 + \Pi_2 + \Pi_3) = 4\).
 
-        \begin{equation*}
-            4 = 3 + 3 + 3 - 2 - 2 - 2 + \dim \Pi_1 \cap \Pi_2 \cap \Pi_3.
-        \end{equation*}
+We will attempt to generalise some of our results to latin squares in higher dimensions, but first we need some definitions of what that even means.
+\begin{definition}\label{def:hypercube}
+  A (d, n, r, t)-hypercube of dimension \(d\), order \(n\), class \(r\) and type \(t\) is an \(n \times n \times \cdots \times n\) (\(d\) times) array on \(n^r\) distinct symbols such that in every t-subarray (that is, fix \(t\) coordinates and allow the remaining \(d - t\) coordinates to vary) each of the \(n^r\)
+  distinct symbols appears exactly \(n^{d - t - r}\) times.
+  Moreover, if \(d \geq 2r\) two such hypercubes are \textit{orthogonal} if when superimposed each of the \(n^{2r}\) possible distinct pairs appears exactly \(n^{d - 2r}\) times. A set of hypercubes is mutually orthogonal if each pair of hypercubes in the set are orthogonal.
+\end{definition}
 
-        The only way this equation holds therefore is if the dimension of the intersection \(\Pi_1 \cap \Pi_2 \cap \Pi_3\) is a line in \(V(4, q)\) and thus a point in \(PG(3, q)\).
-    \end{proof}
+The familiar latin square is a \((2, n, 1, 0)\)-hypercube. We will be interested in extending the classic result given in Theorem~\ref{thm:mols}, to do this we require a
+theorem that bounds the size of a mutually orthogonal set of hypercubes of dimension \(d\), order \(n\), type \(t\) and class \(r\). In~\cite{ethier2012sets} we have the following theorem bounding sets of MOHC:
 
-    We now present a generalised construction of Theorem~\ref{thm:mols} for \((3, n, 1, 2)\)-hypercubes.
+\begin{theorem}~\label{thm:mut-ortho}
+  The maximum number of mutually orthogonal hypercubes (MOHC) of dimension \(d\), order \(n\), type \(t\) and class \(r\) is bounded above by
 
-    \begin{theorem}
-        A complete set of mutually orthogonal (3, n, 1, 2)-hypercubes always exists if \(n\) is a prime power.
-    \end{theorem}
-    \begin{proof}
-        Due to Theorem~\ref{thm:mut-ortho}, if we can construct a set of \({(n - 1)}^2\) mutually orthogonal hypercubes we will have a complete set. To do this we are going to work in \(PG(3,n)\) and use the plane at infinity \(\Pi_{\infty}\) in much the same way the line at infinity was used in Theorem \(\ref{thm:mols}\).
-        Designate three non-concurrent lines in \(\Pi_{\infty}\), \(R\), \(C\), and \(S\) and the vertices of the triangle defined by their intersection \(x_1, x_2, x_3\) (this is always possible as there are three non-colinear points in any projective plane). 
-        There are \(n^2 + n + 1 - (n + 1) - n - (n - 1) = {(n - 1)}^2\) lines that do not intersect \(R\), \(C\) or \(S\) at \(x_1, x_2, x_3\). By Lemma~\ref{lemma:1} there are \(n + 1\) planes through each line in \(\Pi_{\infty}\) and \(n\) planes besides \(\Pi_{\infty}\).
-        The \(3q\) distinct planes through \(R\), \(C\) and \(S\) are going to be our coordinate planes, and by Lemma~\ref{lemma:3} because any pair of planes from a triple of coordinate planes intersect at distinct lines containing the non-colinear points \(x_1, x_2, x_3\), each triple intersects at a point.
-        Moreover one can construct any point \(p\) of the \(q^3\) points in \(PG(3, q)\) not contained in \(\Pi_{\infty}\) by constructing the planes containing it and each of lines \(R, C, S\) in turn. It therefore makes sense to coordinatise each of the \(q^3\) points of a (3, n, 1, 2)-hypercube by the intersections of coordinate planes.
-        Note that a \(2\)-subarray correpsonds to the intersection of two coordinate planes.
-        Considering any of the \({(n - 1)}^2\) lines not incident to \(x_1, x_2, x_3\) we can take each of the \(q\) planes (apart from \(\Pi_{\infty}\)) through this line and call them symbol planes. A symbol plane \(S_i\) contains \(n^2 + n + 1\) points, \(n + 1\) of which are in \(\Pi_{\infty}\) and so places the symbol \(i\) at \(n^2\) positions in a hypercube.
-        Because our chosen line defining \(S_i\) is not incident to \(x_1, x_2, x_3\) the intersection of \(S_i\) with two coordinate planes \(\Pi_1, \Pi_2\) through two distinct lines among \(\{R, C, S\}\) must intersect at a point. The previous assertion is equivalent to saying that each 2-subarray of the hypercube will contain the symbol \(i\) exactly once.
-        Because any pair of symbol planes chosen from the same line only intersect at that line in \(\Pi_{\infty}\) the symbol planes partition the \(n^2\) coordinate points and thus assigning the symbol \(i\) to each point in the hypercube touching the symbol plane \(S_i\) defines a \((3, n, 1, 2)\)-hypercube. Defining the set of \({(n - 1)}^2\)
-        hypercubes in a similar fashion gives us a set \(H\). The set \(H\) must be mutually orthogonal because any pair of symbol planes \(S_i, S^{\prime}_j\) from different lines in \(\Pi_{\infty}\) will intersect at a line for which \(q\) points are outside \(\Pi_{\infty}\) and this is equivalent to each pair of symbols occurring exactly \(n\) times when overlapping any pair of hypercubes in \(H\).
-    \end{proof}
+  \begin{equation}
+    \frac{1}{n^r - 1}\left(n^d - 1 - \binom{d}{1}(n - 1) - \binom{d}{2}{(n - 1)}^2 - \cdots - \binom{d}{t} {(n - 1)}^t\right). \label{eq:ortho-bound}
+  \end{equation}
 
-    We can also prove a more general result for arbitrary dimensions.
+\end{theorem}
 
-    \begin{theorem}\label{thm:general-ortho-proof}
-A complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes will always exist if \(n\) is a prime power.
+A complete set of mutually orthogonal \((d,n,r,t)\)-hypercubes is a set of MOHC attaining the bound in Theorem~\ref{thm:mut-ortho}. The following theorem is a generalisation of Theorem~\ref{thm:mols} to arbitrary dimensions.
+
+\begin{theorem}\label{thm:general-ortho-proof}
+  A complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes will always exist if \(n\) is a prime power.
 \end{theorem}
 
 \begin{proof}
   Let \(X = \{e_{1}, e_{2}, \ldots, e_{d}\}\) where \(e_{i} = (0, 0, \ldots, 1, 0, \ldots, 0)\) is a point in \(\PG(d, n)\) having a 1 in the \(i\)th position and zero everywhere else.
-  By removing some \(e_i\) we get a subset \(S\) of \(d - 1\) points in \(X\) that spans a \(d - 2\) plane in the hyperplane at infinity, furthermore there are \(q\) hyperplanes through \(S\) apart from the hyperplane at infinity --- \(x_i X_i + X_{d + 1}\) and \(X_{i} = 0\).
+  By removing some \(e_i\) we get a subset \(S\) of \(d - 1\) points in \(X\) that spans a \(d - 2\) plane in the hyperplane at infinity. Furthermore there are \(q\) hyperplanes through \(S\) apart from the hyperplane at infinity --- \(x_i X_i + X_{d + 1}\) and \(X_{i} = 0\).
   The hyperplanes constructed by removing some \(e_i\) from \(X\) we will call coordinate hyperplanes. If we take \(d\) coordinate planes we can show their intersection is an affine point. Pick \(d\) hyperplanes constructed by removing one of \(e_1, e_2 \ldots e_d\) in turn,
   to obtain their intersection we must find a solution to the following system of homogenous equations:
 
   \begin{equation*}
     A = \begin{bmatrix}
-      x_1 & 0 & \ldots & 0 & \alpha_1 \\
-      0 & x_2 & \ldots & 0 & \alpha_2 \\
-      \ldots \\ 
+      x_1 & 0 & \ldots & 0 & 0 & \alpha_1 \\
+      0 & x_2 & \ldots & 0 & 0 & \alpha_2 \\
+      \ldots \\
       0 & 0 & \ldots & 0 & x_d & \alpha_d
     \end{bmatrix}
   \end{equation*}
-  Where \(\alpha_i = 0\) if the hyperplane it describes is \(X_i\) and \(\alpha_i = 0\) otherwise.
-  This system has rank \(d\) and a single projective point as a solution, namely \((\alpha_1 x_1, \alpha_2 x_2, \ldots, \alpha_d x_d, 1)\). This allows us to coordinatise the affine space in terms of 
+  Where \(\alpha_i = 0\) if the hyperplane it describes is \(X_i = 0\) and \(\alpha_i = 1\) otherwise.
+  This system has rank \(d\) and a single projective point as a solution, namely \((\alpha_1 x_1, \alpha_2 x_2, \ldots, \alpha_d x_d, 1)\). This allows us to coordinatise the affine space in terms of
   hyperplanes at infinity.
 
-  Our analogue to symbol planes in Theorem~\ref{thm:mut-ortho} will be symbol hyperplanes whose intersection with the hyperplane at infinity does not include \(X\). To count such hyperplanes let 
-  \(A_{i}\) be the set of \(d - 2\) hyperplanes containing the point \(e_{i} \in X\), we wish to count \(|\bigcap A^{\prime}_{i}|\) and this can be done with the principle of inclusion-exclusion and repeated application of Lemma~\ref{lemma:1}
+  Our analogue to symbol planes in Theorem~\ref{thm:mut-ortho} will be symbol hyperplanes whose intersection with the hyperplane at infinity does not include \(X\). Let \(\mathcal{H}\) be the set of \(d - 2\) hyperplanes in \(H_{\infty}\) not containing \(X\). To count such hyperplanes let
+  \(A_{i}\) be the set of \(d - 2\) hyperplanes in \(H_{\infty}\) containing the point \(e_{i} \in X\), we wish to count \(|\bigcap A^{\prime}_{i}|\). This can be done with the principle of inclusion-exclusion and repeated application of Lemma~\ref{lemma:1}
 
   \begin{align*}
     |\bigcap A^{\prime}_{i}| &= \sum_{i = 0}^{d - 1} (-1)^{i} \binom{d}{i} \frac{n^{d - i}}{n - 1} \\
@@ -432,73 +421,103 @@ A complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes will alway
                   &= \frac{1}{n - 1}\left(\sum_{i = 0}^{d - 1}{(-1)}^{i} \binom{d}{i} n^{d - i} - \left(\sum_{i = 0}^{d} {(-1)}^{i} \binom{d}{i} - {(-1)}^{d}\right)\right) \\
                   &= \frac{1}{n - 1}\left(\sum_{i = 0}^{d - 1}{(-1)}^{i} \binom{d}{i} n^{d - i} + {(-1)}^{d}\right) \\
                   &= \frac{1}{n - 1}\left(\sum_{i = 0}^{d}{(-1)}^{i} \binom{d}{i} n^{d - 1}\right) \\
-                  &= \frac{1}{n - 1}(n - 1)^{d} \\
-                  &= (n - 1)^{d - 1}
+                  &= \frac{1}{n - 1}{(n - 1)}^{d} \\
+                  &= {(n - 1)}^{d - 1}
   \end{align*}
 
 
-  Taking any hyperplane through any of the \((n - 1)^{d - 1}\) planes at infinity gives us a hyperplane of the form \(c_1X_1 + c_2X_2 + \ldots + c_d X_d + c_{d + 1}X_{d + 1}\) with each \(c_i\) non-zero (to avoid including one of the basis vectors). 
-  We can now consider it's intersection with \(d - 1\) coordinate planes, and WLOG assume that these planes are of the form \(x_i X_i + X_{d + 1}\) for each \(1 \leq i \leq d - 1\). Their intersection is the homogenous solution to the following,
+  Let \(H = \{H^{1}, H^{2}, \ldots, H^{{(n - 1)}^{d - 1}}\}\) be a set of \(n \times n \times \cdots \times n\) (\(d\) times) arrays, to construct \(H^{i}\) one considers all \(n\) hyperplanes \(S_{1}, S_{2}, \ldots, S_{n}\) through some plane in \(\mathcal{H}\) and let \(H^{i}_{(x_{1}, x_{2}, \ldots, x_{d})} = j\) if and only if \((x_{1}, x_{2}, \ldots, x_{d}, 1) \in S_{j}\).
+  We must show that these arrays are a complete set of MOHC.
+  Taking any hyperplane through any of the planes in \(\mathcal{H}\) gives us a hyperplane of the form \(c_1X_1 + c_2X_2 + \ldots + c_d X_d + c_{d + 1}X_{d + 1} = 0\), with each \(c_i\) non-zero (to avoid including one of the basis vectors).
+  We can now consider it's intersection with \(d - 1\) coordinate planes (describing a \((d - 1)\)-subarray), and WLOG assume that these planes are of the form \(x_i X_i + X_{d + 1}\) for each \(1 \leq i \leq d - 1\). Their intersection is the homogenous solution to the following,
 
   \begin{equation*}
     A = \begin{bmatrix}
-      x_1 & 0 & \ldots & 0 & \alpha_1 \\
-      0 & x_2 & \ldots & 0 & \alpha_2 \\
-      \ldots \\ 
-      0 & 0 & \ldots & x_{d - 1} & 0 & \alpha_d \\
+      x_1 & 0 & \ldots & 0 & 0 & 1 \\
+      0 & x_2 & \ldots & 0 & 0 & 1 \\
+      \ldots \\
+      0 & 0 & \ldots & x_{d - 1} & 0 & 1 \\
       c_1 & c_2 & \ldots & c_d & c_{d + 1} 
     \end{bmatrix}
   \end{equation*}
 
-  This system has rank at least \(d - 1\) and at most \(d\) so the solution space is either a point or a line. If the solution space is a line, or if a point at infinity we may add the restriction \(X_{d + 1} = 0\) and obtain,
-  \(X_1 = X_2 = \ldots = X_{d - 1} = 0\) and plugging this into our last equation get \(c_d X_d = 0\). Because \(c_d \neq 0\) we have \(X_d = 0\) and the solution \((0, 0, \ldots, 0)\) --- a contradiction. Thus the solution must be an affine point, i.e that the symbol hyperplanes intersect each 1-subaray at a single point. 
-  By each of \(a \in \mathbb{F}_q\) to each of the \(q\) hyperplanes through each of the \((d - 2)\)-dimensional spaces in the hyperplane at infinity not intersecting \(X\) we get a set of \((n - 1)^{d - 1}\) hypercubes. 
-  These hypercubes are orthogonal because the intersection of any pair of symbol planes must be a \((d - 2)\)-dimensional space with \(\sum_i^{d - 2} q^{i} - \sum_i^{d - 3} q^{i} = q^{d - 2}\) affine points.
+  This system has rank at least \(d - 1\) and at most \(d\) so the solution space is either a point or a line. If the solution space is a line, or point at infinity we may add the restriction \(X_{d + 1} = 0\) and obtain,
+  \(X_1 = X_2 = \ldots = X_{d - 1} = 0\) and plugging this into our last equation get \(c_d X_d = 0\). Because \(c_d \neq 0\) we have \(X_d = 0\) and the solution \((0, 0, \ldots, 0)\) --- a contradiction. Thus the solution must be an affine point.
+  Picking two symbol hyperplanes from two distinct hypercubes \(H_{i}\) and \(H_{j}\) their intersection is a \((d - 2)\)-dimensional space with \(\sum_i^{d - 2} q^{i} - \sum_i^{d - 3} q^{i} = q^{d - 2}\) affine points, so \(H_{i}\) and \(H_{j}\) are orthogonal.
 
-  By Theorem~\ref{thm:mut-ortho} we have a complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes.
+  By Theorem~\ref{thm:mut-ortho} \(\mathcal{H}\) is a complete set of mutually orthogonal \((d, n, 1, d - 1)\)-hypercubes.
 \end{proof}
 
 
-Theorem~\ref{thm:general-ortho-proof} has been proven elsewhere in literature, notably in~\cite{laywine1998discrete}. Polynomials of the form \(f_{a_1, a_2, \ldots, a_d}(x_1, x_2, \ldots, x_d) = a_1x_1 + a_2x_2 + \ldots a_d x_d\), with at least two \(a_i\) nonzero, are used to define a complete set of mutually orthogonal \((d, n, 1, 0)\)-hypercubes.
-The polynomials for which all \(a_i\) is nonzero are precisely the hyperplanes not through \(X\) given in Theorem~\ref{thm:general-ortho-proof}. The remaining polynomials correspond to hyperplanes that intersect with one or more of the basis points in \(X\). Whilst this proof was found indepedently of Laywine and Mullen, 
+Theorem~\ref{thm:general-ortho-proof} has been proven elsewhere in literature, notably in~\cite{laywine1998discrete} (albiet a slight generalisation is given there). Mullen and Laywine use polynomials of the form \(f_{a_1, a_2, \ldots, a_d}(x_1, x_2, \ldots, x_d) = a_1x_1 + a_2x_2 + \ldots a_d x_d\), with at least two \(a_i\) nonzero, to define a complete set of mutually orthogonal \((d, n, 1, 0)\)-hypercubes.
+The polynomials for which all \(a_i\) is nonzero are precisely the hyperplanes not through \(X\) given in Theorem~\ref{thm:general-ortho-proof}. The remaining polynomials correspond to hyperplanes that intersect with one or more of the basis points in \(X\). Whilst this proof was found indepedently of Laywine and Mullen,
 we have shown it is the same as what they end up with.
 
 It would be nice if, like in the two dimensional case, the existence of a complete set of \((d,n,r,0)\)-hypercubes implied the existence of a projective space \(\PG(d, n)\), 
 however~\cite{morgan2000affine} suggests that without further restrictions of the hypercubes chosen we cannot construct the right geometry.
 
 
+\section{Hypercubes and MDS Codes}
+
+The following section is a survey of known results about the connection between sets of mutually orthogonal hypercubes and MDS codes. As in the previous section we will mainly study these from a geometric angle, and connect what others have done to objects in geometry.
+We are interested in codes, sets of vectors over finite fields of a fixed length.
+
+\begin{definition}
+  An \((n, M, d)\) \(q\)-ary code \(C\) is a set of \(M\) vectors in \(\mathbb{F}_{q}^{n}\) with the property that any two vectors in the code (known as \textit{codewords}) \(\mathbf{u}, \mathbf{v} \in C\) have a \textit{hamming distance} of at least \(d\) --- that is the number of positions \(\mathbf{u}\) and \(\mathbf{v}\) disagree in is at least \(d\).
+\end{definition}
+
+The hamming distance function \(d(\mathbf{u}, \mathbf{v})\) is defined to be the number of positions \(i\) such that \(\mathbf{u}_{i} \neq \mathbf{v}_{i}\), and it is not too hard to show that the hamming distance is a metric function (being positive semi-definite, symmetric, and obeying the triangle inequality).
+The following bound is known as the \textit{Singleton Bound}, and it is a relatively crude upper bound on the number of codewords that can be a \(q\)-ary code of fixed length and distance.
+
+\begin{lemma}[Singleton Bound]
+  Given an \((n, M, d)\)-code \(C\) over \(\mathbb{F}_{q}^{n}\), \(M \leq q^{n - d + 1}\).
+\end{lemma}
+
+\begin{proof}
+  Suppose that \(C\) is an \((n, M, d)\)-code over \(\mathbb{F}_{q}^{n}\). Because \(C\) has distance \(d\) the first \(n - d + 1\) positions of each codeword must be unique, otherwise we would have two codewords \(\mathbf{u}, \mathbf{v}\) with distance \(n - (n - d + 1) = d - 1\) which is a contradiction.
+  So there can only be as many codewords as there are vectors in \(\mathbf{F}_{q}^{n - d + 1}\), and the bound \(M \leq q^{n - d + 1}\) follows.
+\end{proof}
+
+Codes that meet the Singleton Bound are called Maximally Distance Separated (MDS), on account of being a code with the largest distance of a fixed size. It turns out that MDS codes may be placed in one to one correspondence with another kind of object in geometry, projective arcs.
+
+\begin{definition}
+  A projective \(k\)-arc is a set of points in \(\PG(n, q)\), \(n \geq 3\) is a set of \(k \geq n + 1\) points such that no \(n + 1\) points lie in a common hyperplane.
+\end{definition}
+oeuaoeu
+These arcs are in some
+
 
 \begin{bibdiv}
   \begin{biblist}
     \bib{laywine1998discrete}{book}{
-  title={Discrete mathematics using Latin squares},
-  author={Laywine, Charles F and Mullen, Gary L},
-  volume={49},
-  year={1998},
-  pages={50--51},
-  publisher={John Wiley \& Sons}
-}
-\bib{ethier2012sets}{article}{
-  title={Sets of orthogonal hypercubes of class r},
-  author={Ethier, John T and Mullen, Gary L and Panario, Daniel and Stevens, Brett and Thomson, David},
-  journal={Journal of Combinatorial Theory, Series A},
-  volume={119},
-  number={2},
-  pages={430--439},
-  year={2012},
-  publisher={Elsevier}
-}
+      title={Discrete mathematics using Latin squares},
+      author={Laywine, Charles F and Mullen, Gary L},
+      volume={49},
+      year={1998},
+      pages={50--51},
+      publisher={John Wiley \& Sons}
+    }
+    \bib{ethier2012sets}{article}{
+      title={Sets of orthogonal hypercubes of class r},
+      author={Ethier, John T and Mullen, Gary L and Panario, Daniel and Stevens, Brett and Thomson, David},
+      journal={Journal of Combinatorial Theory, Series A},
+      volume={119},
+      number={2},
+      pages={430--439},
+      year={2012},
+      publisher={Elsevier}
+    }
 
-\bib{morgan2000affine}{article}{
-  title={Affine geometries and sets of equiorthogonal frequency hypercubes},
-  author={Morgan, Ilene H},
-  journal={Journal of Combinatorial Designs},
-  volume={8},
-  number={6},
-  pages={435--441},
-  year={2000},
-  publisher={Wiley Online Library}
-}
+    \bib{morgan2000affine}{article}{
+      title={Affine geometries and sets of equiorthogonal frequency hypercubes},
+      author={Morgan, Ilene H},
+      journal={Journal of Combinatorial Designs},
+      volume={8},
+      number={6},
+      pages={435--441},
+      year={2000},
+      publisher={Wiley Online Library}
+    }
 
   \end{biblist}
 \end{bibdiv}
