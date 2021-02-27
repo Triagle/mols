@@ -1,0 +1,33 @@
+#+TITLE: Mutually Orthogonal Latin Hypercubes and Finite Projective Geometry
+
+This repo is the output of a summer research project in the Mathematics and Statistics Department at the University of Canterbury looking into links between
+Latin Hypercubes and Geometry. The report (MOLS.pdf) assumes a mathematical background the casual passerby likely doesn't have, so this readme aims to give the reader a high level understand of what this research was about.
+
+* Background
+
+A Latin square is an n by n matrix of values, in which on of n symbols is placed in each of the n^2 entries such that no row or column contains the same symbol twice. Here is an example of a 3 x 3 latin square,
+
+| 1 | 2 | 3 |
+| 3 | 1 | 2 |
+| 2 | 3 | 1 |
+
+Latin squares are theoretical objects of great importance, with entire textbooks written about their application to fields of Mathematics. Orthogonal Latin squares are important to scientists attempting to design fair experiments and to network engineers attempting to communicate over noisy channels.
+
+By contrast projective geometry is the study of geometry with particular emphasis on projection. A key notion is the idea of "points at infinity", an idea derived from the notion that parallel train tracks meet at infinity when the three dimensional space of our universe is projected into a two dimensional image our eyes perceive. Projective geometry in which the spaces we describe are "finite" (in a way I cannot summarise easily) is Finite Projective Geometry. Projective Geometry may seem really abstract but ideas from projective geometry have found their way into Physics, Computer Graphics, Computer Vision, and Error Correcting Codes.
+
+
+* Results
+
+Using Projective Geometry, known results about latin squares and their higher
+dimensional analogues (Latin Hypercubes) were reproven with geometric links --
+establishing a link between these two seemingly unrelated fields. Whilst most of
+these results were known, one proof of a know result appears to have not been
+looked at in geometric fashion before. A special case of latin squares, namely
+Sudoku, was also studied. From our investigations Sudoku, using GAP and a
+Constraint Satisfaction Solver we were able to take certain properties about
+sets of sudoku and produce the first concrete examples of such sudoku meeting
+these properties. Much of the process involved learning a lot of projective
+geometry, which I have included so that for the mathematically inclined the
+report is self contained, any undergrad in Mathematics should be able to read
+the report in its entirety and understand everything with a bit of work provided
+they have the right background in finite fields and linear algebra.
